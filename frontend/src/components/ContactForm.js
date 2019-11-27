@@ -32,7 +32,7 @@ export const NewContactForm = () => {
                                 <input
                                     id="name"
                                     type="text"
-                                    placeholder="Henry Lee"
+                                    placeholder="Jane Doe"
                                     className="validate"
                                     value={name}
                                     onChange={( e ) => setName( e.target.value )}
@@ -45,7 +45,7 @@ export const NewContactForm = () => {
                                 <input
                                     id="phoneNr"
                                     type="text"
-                                    placeholder="072 978 69 69"
+                                    placeholder="072-978 69 69"
                                     className="validate"
                                     value={phoneNr}
                                     onChange={( e ) => setPhoneNr( e.target.value )}
@@ -60,7 +60,7 @@ export const NewContactForm = () => {
                                 <input
                                     id="email"
                                     type="email"
-                                    placeholder="henry.lee@idk.com"
+                                    placeholder="jane@idk.com"
                                     className="validate"
                                     value={email}
                                     onChange={( e ) => setEmail( e.target.value )}

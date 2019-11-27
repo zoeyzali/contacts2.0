@@ -1,12 +1,14 @@
 .contacts-list {
     .contact-li {
         text-align: center;
+        padding: 0.2rem 0;
     }
 
-
-    .container.contact-form {
-        text-align: center;
+    .contact-form,
+    .input.field {
+        font-size: 1rem;
     }
+
 
     @media only screen and (min-width: 601px) {
 
@@ -18,7 +20,6 @@
             left: auto;
             right: auto;
             text-align: center;
-
         }
     }
 

@@ -19,14 +19,14 @@ const ContactsList = () => {
         ) : (
                 <div className="empty">
                     <h2>No Contacts</h2>
-                    <div className="btn-container">
-                        <Link to="/contacts/add" className="btn-floating btn-large waves-effect waves-light addBtn">
-                            <i className="material-icons">add</i>
-                        </Link>
-                    </div>
                 </div>
             )
         }
+        <div className="btn-container">
+            <Link to="/contacts/add" className="btn-floating btn-large waves-effect waves-light addBtn">
+                <i className="material-icons">add</i>
+            </Link>
+        </div>
     </div>
 }
 
