@@ -38,7 +38,7 @@ export default function SideNavMenu( props ) {
                 }}
             >
                 <li>
-                    <Link className="sidemenu-user-info" to="/"
+                    <Link className="user-info" to="/"
                         style={{
                             backgroundColor: "#03a9f4",
                             color: "#fff", paddingTop: "0.2rem"
@@ -59,7 +59,7 @@ export default function SideNavMenu( props ) {
                 <li>
                     <Button
                         flat={true}
-                        className="raised-btn">
+                        className="logout-btn">
                         Sign out <i className="material-icons">logout</i></Button>
                 </li>
             </ul>

@@ -22,7 +22,11 @@ h4 {
 
 .btn {
     background-color: $primary-color !important;
-    color: #ffffff !important;
+    color: #fff !important;
     width: 50%;
     text-align: center;
+}
+
+.btn-flat {
+    margin-left: 0.7rem;
 }
