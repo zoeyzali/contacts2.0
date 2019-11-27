@@ -15,16 +15,16 @@ function App() {
     return (
         <UserContextProvider>
             <Router>
-                <>
-                    <section className="container-fluid">
-                        <Header />
+                <section className="container-fluid">
+                    <Header />
+                    <div className="container-margin">
                         <Route exact path="/" component={HomePage} />       <ContactContextProvider>
                             <Route exact path="/contacts" component={ContactsList} />
                             <Route exact path="/contacts/add" component={NewContactForm} />
                             <Route exact path="/stuff" component={Stuff} />
                         </ContactContextProvider>
-                    </section>
-                </>
+                    </div>
+                </section>
             </Router>
         </UserContextProvider>
     )

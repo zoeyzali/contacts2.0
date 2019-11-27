@@ -14,12 +14,17 @@ export default function SideNavMenu( props ) {
     return (
         <>
             <nav className="light-blue nav-header">
-                <Link to="#" className="sidenav-trigger" onClick={() => setSlider( s => !s )}>
+                <Link to="#" className="sidenav-trigger"
+                    onClick={() => setSlider( s => !s )}>
                     <i className="material-icons">menu</i>
                 </Link>
+
                 <Link to="/" className="logo-brand">
-                    <i className="material-icons" style={{ color: "white" }}>phone</i></Link>
+                    <i className="material-icons"
+                        style={{ color: "white" }}>phone</i>
+                </Link>
             </nav>
+
             <div className="sidenav-overlay" onClick={() => setSlider( s => !s )}
                 style={{
                     display: slider && size.width < 980 ? "block" : "none",
@@ -34,21 +39,28 @@ export default function SideNavMenu( props ) {
                     transform: slider || size.width > 980 ? "translateX(0%)" : "",
                     transitionProperty: "transform",
                     transitionDuration: ".25s",
-                    width: "80%"
+                    // width: "60%"
                 }}
             >
                 <li>
                     <Link className="user-info" to="/"
                         style={{
                             backgroundColor: "#03a9f4",
-                            color: "#fff", paddingTop: "0.2rem"
+                            color: "#fff",
                         }}>
                         Logged in as {user.name}
                     </Link>
                 </li>
                 {props.paths.map( ( url, index ) => (
-                    <li key={index} onClick={() => setSlider( s => !s )}>
-                        <Link className="waves-effect" to={url.path} >
+                    <li key={index}
+                        onClick={() => setSlider( s => !s )}
+                        style={{
+                            textTransform: "uppercase",
+                            fontSize: "1rem",
+                            marginTop: "0.8rem"
+                        }}>
+                        <Link className="waves-effect"
+                            to={url.path}>
                             {url.name}
                         </Link>
                     </li>
@@ -60,7 +72,9 @@ export default function SideNavMenu( props ) {
                     <Button
                         flat={true}
                         className="logout-btn">
-                        Sign out <i className="material-icons">logout</i></Button>
+                        Sign out
+                        <i className="material-icons">logout</i>
+                    </Button>
                 </li>
             </ul>
         </>
