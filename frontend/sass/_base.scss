@@ -19,3 +19,14 @@ h4 {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
+
+.btn {
+    background-color: $primary-color !important;
+    color: #fff !important;
+    width: 50%;
+    text-align: center;
+}
+
+.btn-flat {
+    margin-left: 0.7rem;
+}

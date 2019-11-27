@@ -1,0 +1,42 @@
+.contacts-list {
+    .contact-li {
+        text-align: center;
+        padding: 0.2rem 0;
+    }
+
+    .contact-form,
+    .input.field {
+        font-size: 1rem;
+    }
+
+
+    @media only screen and (min-width: 601px) {
+
+        .row .col.m6,
+        .col.l6,
+        .contact-form {
+            width: 80%;
+            margin-left: auto;
+            left: auto;
+            right: auto;
+            text-align: center;
+        }
+    }
+
+    .btn-container {
+        position: relative;
+    }
+
+    .btn-floating.addBtn {
+        background-color: $primary-color;
+        position: absolute;
+        right: 10px;
+        top: 95%;
+        margin-top: 0.5rem;
+    }
+
+    .secondary-content.deleteBtn {
+        color: crimson;
+        //#db0909bb
+    }
+}
