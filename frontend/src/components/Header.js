@@ -26,12 +26,8 @@ export const Header = () => {
 
     // const { user } = useContext( UserContext )
     return (
-        <div className="container-margin">
-            <Row>
-
-                <SideNavMenu paths={menuPaths} title="Menu" />
-
-            </Row>
-        </div>
+        <Row>
+            <SideNavMenu paths={menuPaths} title="Menu" />
+        </Row>
     )
 }

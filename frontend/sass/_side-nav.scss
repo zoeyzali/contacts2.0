@@ -8,9 +8,20 @@
         right: 10px;
     }
 
-    .user-info {
-        padding: 0.3rem 0;
+    ul#slide-out {
+        a.user-info {
+            padding: 0.3rem 0.5rem 4rem 2rem;
+        }
+
+        .sidenav li>a {
+            margin-top: 0.2rem;
+            text-transform: uppercase !important;
+            font-size: 1rem;
+            line-height: 52px !important;
+        }
     }
+
+
 
     nav {
         background-color: $primary-color;
@@ -32,7 +43,7 @@
 }
 
 
-@media only screen and (min-width: 980px) {
+@media only screen and (min-width: 981px) {
     .container-margin {
         margin-left: 300px;
     }
