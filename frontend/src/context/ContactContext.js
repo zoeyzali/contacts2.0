@@ -11,13 +11,12 @@ const ContactContextProvider = ( props ) => {
         // { name: "Pow Pow", phoneNr: "0800 420 420", email: "powpow@gmail.com", id: 2 }
     ], () => {
         const contactData = localStorage.getItem( 'contacts' )
-        // console.log( contactData, contacts, 'parsing' )
+        console.log( contactData, contacts, 'parsing' )
         return contactData ? JSON.parse( contactData ) : []
     } )
 
     useEffect( () => {
         localStorage.setItem( 'contacts', JSON.stringify( contacts ) )
-        // console.log( localStorage, JSON.stringify( contacts ), 'storage' )
     }, [contacts] )
 
 

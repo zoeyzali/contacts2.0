@@ -14,7 +14,7 @@ export const NewContactForm = () => {
         setName( '' )
         setPhoneNr( '' )
         setEmail( '' )
-        console.log( name, email, phoneNr, 'input loggin' )
+        // console.log( name, email, phoneNr, 'input loggin' )
     }
 
     return (
@@ -32,6 +32,7 @@ export const NewContactForm = () => {
                                     className="validate"
                                     value={name}
                                     onChange={( e ) => setName( e.target.value )}
+                                    required
                                 />
                                 <label htmlFor="name" hidden>Name</label>
                             </div>
@@ -44,19 +45,22 @@ export const NewContactForm = () => {
                                     className="validate"
                                     value={phoneNr}
                                     onChange={( e ) => setPhoneNr( e.target.value )}
+                                    required
                                 />
                                 <label htmlFor="phoneNr" hidden>PhoneNumber</label>
                             </div>
                         </div>
+
                         <div className="row">
                             <div className="input-field col s12">
                                 <input
                                     id="email"
                                     type="email"
-                                    placeholder="henrylee@idk.com"
+                                    placeholder="henry.lee@idk.com"
                                     className="validate"
                                     value={email}
                                     onChange={( e ) => setEmail( e.target.value )}
+                                    required
                                 />
                                 <label htmlFor="email" hidden>Email</label>
                             </div>
