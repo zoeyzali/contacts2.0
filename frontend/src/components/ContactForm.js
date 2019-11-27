@@ -3,25 +3,29 @@ import { Button } from 'react-materialize'
 import { ContactContext } from '../context/ContactContext'
 
 export const NewContactForm = () => {
-    const { addContact } = useContext( ContactContext )
+    const { dispatch } = useContext( ContactContext )
     const [name, setName] = useState( '' )
     const [phoneNr, setPhoneNr] = useState( '' )
     const [email, setEmail] = useState( '' )
 
     const handleSubmit = ( e ) => {
         e.preventDefault()
-        addContact( name, phoneNr, email )
+        dispatch( {
+            type: 'ADD_CONTACT', contact: {
+                name,
+                phoneNr,
+                email
+            }
+        } )
         setName( '' )
         setPhoneNr( '' )
         setEmail( '' )
-        // console.log( name, email, phoneNr, 'input loggin' )
     }
-
     return (
         <>
             <div className="row">
                 <h3>Add Contact</h3>
-                <div className="col s12 m6 l6">
+                <div className="col s12">
                     <form onSubmit={handleSubmit} className="container contact-form center-align">
                         <div className="row">
                             <div className="input-field col s6">
