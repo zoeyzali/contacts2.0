@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Ev. backend",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^4.13.0",
+    "nodemon": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoeyzali/contacts2.0.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Express",
+    "node-sass"
+  ],
+  "author": "Zoe Ali",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zoeyzali/contacts2.0/issues"
+  },
+  "homepage": "https://github.com/zoeyzali/contacts2.0#readme"
+}

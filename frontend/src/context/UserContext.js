@@ -1,15 +1,24 @@
-import React, {createContext} from 'react'
+import React, { createContext, useState } from 'react'
 
-const MusicPlayerContext = createContext([{}, ()=>{}])
+export const UserContext = createContext()
 
-const MusicPlayerProvider = (props)=>{
-    return(
-        <MusicPlayerContext.Provider value={}>
-        
-        {props.children}
+export const UserContextProvider = ( props ) => {
+    const [user, setUser] = useState( {
+        name: "Zoe Bowie",
+        email: "zoeecoding@gmail.com",
+        id: 1
+    } )
 
-        </MusicPlayerContext.Provider>
+    const keepAuthUser = ( user ) => {
+        console.log( user, 'the user' )
+        setUser( user )
+    }
+
+    return (
+        <UserContext.Provider value={{ user, keepAuthUser: keepAuthUser }}>
+            {props.children}
+
+        </UserContext.Provider>
     )
 }
 
-export {MusicPlayerContext, MusicPlayerProvider}
