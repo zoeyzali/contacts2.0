@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-materialize'
+import { Row } from 'react-materialize'
 import SideNavMenu from './SideNavMenu'
 // import { UserContext } from '../context/UserContext'
 //{useContext}
@@ -24,9 +24,9 @@ export const Header = () => {
     return (
         <div className="container-margin">
             <Row>
-                <Col s={12}>
-                    <SideNavMenu paths={menuPaths} title="Menu" />
-                </Col>
+
+                <SideNavMenu paths={menuPaths} title="Menu" />
+
             </Row>
         </div>
     )
