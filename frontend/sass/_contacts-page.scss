@@ -3,9 +3,23 @@
         text-align: center;
     }
 
-    form {
-        padding: 1rem 1.2rem;
-        margin-top: 0.5rem;
+
+    .container.contact-form {
+        text-align: center;
+    }
+
+    @media only screen and (min-width: 601px) {
+
+        .row .col.m6,
+        .col.l6,
+        .contact-form {
+            width: 80%;
+            margin-left: auto;
+            left: auto;
+            right: auto;
+            text-align: center;
+
+        }
     }
 
     .btn-container {
@@ -21,6 +35,7 @@
     }
 
     .secondary-content.deleteBtn {
-        color: #db0909bb;
+        color: crimson;
+        //#db0909bb
     }
 }

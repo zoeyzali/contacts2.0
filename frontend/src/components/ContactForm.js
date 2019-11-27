@@ -19,55 +19,57 @@ export const NewContactForm = () => {
 
     return (
         <>
-            <div className="row contact-form">
+            <div className="row">
                 <h3>Add Contact</h3>
-                <form onSubmit={handleSubmit} className="col s12">
-                    <div className="row">
-                        <div className="input-field col s6">
-                            <input
-                                id="name"
-                                type="text"
-                                placeholder="Henry Lee"
-                                className="validate"
-                                value={name}
-                                onChange={( e ) => setName( e.target.value )}
-                            />
-                            <label htmlFor="name" hidden>Name</label>
-                        </div>
+                <div className="col s12 m6 l6">
+                    <form onSubmit={handleSubmit} className="container contact-form center-align">
+                        <div className="row">
+                            <div className="input-field col s6">
+                                <input
+                                    id="name"
+                                    type="text"
+                                    placeholder="Henry Lee"
+                                    className="validate"
+                                    value={name}
+                                    onChange={( e ) => setName( e.target.value )}
+                                />
+                                <label htmlFor="name" hidden>Name</label>
+                            </div>
 
-                        <div className="input-field col s6">
-                            <input
-                                id="phoneNr"
-                                type="text"
-                                placeholder="072 978 69 69"
-                                className="validate"
-                                value={phoneNr}
-                                onChange={( e ) => setPhoneNr( e.target.value )}
-                            />
-                            <label htmlFor="phoneNr" hidden>PhoneNumber</label>
+                            <div className="input-field col s6">
+                                <input
+                                    id="phoneNr"
+                                    type="text"
+                                    placeholder="072 978 69 69"
+                                    className="validate"
+                                    value={phoneNr}
+                                    onChange={( e ) => setPhoneNr( e.target.value )}
+                                />
+                                <label htmlFor="phoneNr" hidden>PhoneNumber</label>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-field col s12">
-                            <input
-                                id="email"
-                                type="email"
-                                placeholder="henrylee@idk.com"
-                                className="validate"
-                                value={email}
-                                onChange={( e ) => setEmail( e.target.value )}
-                            />
-                            <label htmlFor="email" hidden>Email</label>
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="henrylee@idk.com"
+                                    className="validate"
+                                    value={email}
+                                    onChange={( e ) => setEmail( e.target.value )}
+                                />
+                                <label htmlFor="email" hidden>Email</label>
+                            </div>
                         </div>
-                    </div>
-                    <Button
-                        flat={true}
-                        type="submit"
-                        value="Add contact"
-                        className="btn waves-effect waves-light">
-                        Add Contact
+                        <Button
+                            flat={true}
+                            type="submit"
+                            value="Add contact"
+                            className="btn waves-effect waves-light">
+                            Add Contact
                     </Button>
-                </form>
+                    </form>
+                </div>
             </div>
         </>
     )
