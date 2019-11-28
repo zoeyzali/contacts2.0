@@ -11,7 +11,8 @@ export const NewContactForm = () => {
     const handleSubmit = ( e ) => {
         e.preventDefault()
         dispatch( {
-            type: 'ADD_CONTACT', contact: {
+            type: 'ADD_CONTACT',
+            contact: {
                 name,
                 phoneNr,
                 email

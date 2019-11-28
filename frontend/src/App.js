@@ -8,6 +8,7 @@ import ContactContextProvider from './context/ContactContext'
 import ContactsList from './components/ContactsList'
 import { NewContactForm } from './components/ContactForm'
 import Stuff from './components/Stuff'
+import { EditContact } from './components/EditContact'
 
 
 
@@ -21,6 +22,7 @@ function App() {
                         <Route exact path="/" component={HomePage} />       <ContactContextProvider>
                             <Route exact path="/contacts" component={ContactsList} />
                             <Route exact path="/contacts/add" component={NewContactForm} />
+                            <Route exact path="/contacts/edit" component={EditContact} />
                             <Route exact path="/stuff" component={Stuff} />
                         </ContactContextProvider>
                     </div>

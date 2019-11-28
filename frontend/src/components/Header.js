@@ -19,7 +19,7 @@ export const Header = () => {
             path: "/contacts/add"
         },
         {
-            name: "Stuff",
+            name: "& Stuff",
             path: "/stuff"
         }
     ]

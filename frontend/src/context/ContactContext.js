@@ -17,7 +17,6 @@ const ContactContextProvider = ( props ) => {
         localStorage.setItem( 'contacts', JSON.stringify( contacts ) )
     }, [contacts] )
 
-
     return (
         <ContactContext.Provider value={{ contacts, dispatch }}>
             {props.children}

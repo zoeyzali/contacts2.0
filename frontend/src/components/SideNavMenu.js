@@ -57,7 +57,7 @@ export default function SideNavMenu( props ) {
                         style={{
                             textTransform: "uppercase",
                             fontSize: "1rem",
-                            marginTop: "0.8rem"
+                            marginTop: "0.6rem"
                         }}>
                         <Link className="waves-effect"
                             to={url.path}>
