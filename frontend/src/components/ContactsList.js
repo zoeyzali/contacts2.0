@@ -14,7 +14,7 @@ const ContactsList = () => {
                     {contacts.map( contact => {
                         return (
                             <ContactDetails key={contact.id}
-                                contact={contact} 
+                                contact={contact}
                             /> )
                     } )}
                 </ul>
