@@ -2,13 +2,14 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './css/style.css'
 import { UserContextProvider } from './context/UserContext'
+import ContactContextProvider from './context/ContactContext'
 import { Header } from './components/Header'
 import { HomePage } from './components/HomePage'
-import ContactContextProvider from './context/ContactContext'
+
 import ContactsList from './components/ContactsList'
 import { NewContactForm } from './components/ContactForm'
 import Stuff from './components/Stuff'
-import { EditContact } from './components/EditContact'
+// import { EditContactForm } from './components/EditContactForm'
 
 
 
@@ -19,10 +20,12 @@ function App() {
                 <section className="container-fluid">
                     <Header />
                     <div className="container-margin">
-                        <Route exact path="/" component={HomePage} />       <ContactContextProvider>
+                        <ContactContextProvider>
+                            <Route exact path="/" component={HomePage} />
                             <Route exact path="/contacts" component={ContactsList} />
                             <Route exact path="/contacts/add" component={NewContactForm} />
-                            <Route exact path="/contacts/edit" component={EditContact} />
+                            {  // <Route exact path="/contacts/edit" component={EditContactForm} />
+                            }
                             <Route exact path="/stuff" component={Stuff} />
                         </ContactContextProvider>
                     </div>

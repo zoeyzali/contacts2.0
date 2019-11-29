@@ -19,7 +19,7 @@ export default function SideNavMenu( props ) {
                     <i className="material-icons">menu</i>
                 </Link>
 
-                <Link to="/" className="logo-brand">
+                <Link to="/contacts" className="logo-brand">
                     <i className="material-icons"
                         style={{ color: "white" }}>phone</i>
                 </Link>

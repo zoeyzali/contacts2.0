@@ -11,7 +11,7 @@ const ContactsList = () => {
             <div className="row">
                 <h2>Contacts List</h2>
                 <ul className="collection">
-                    {contacts.map( contact => {
+                    {contacts.map( ( contact, i ) => {
                         return (
                             <ContactDetails key={contact.id}
                                 contact={contact}

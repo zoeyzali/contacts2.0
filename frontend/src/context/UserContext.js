@@ -10,13 +10,13 @@ export const UserContextProvider = ( props ) => {
         id: 1
     } )
 
-    // const keepAuthUser = ( user ) => {
-    //     console.log( user, 'the user' )
-    //     setUser( user )
-    // }
+    const keepAuthUser = ( user ) => {
+        console.log( user, 'the user' )
+        setUser( user )
+    }
 
     return (
-        <UserContext.Provider value={{ user }}>
+        <UserContext.Provider value={{ user, keepAuthUser }}>
             {props.children}
         </UserContext.Provider>
     )

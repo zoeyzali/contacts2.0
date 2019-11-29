@@ -1,23 +1,28 @@
 import React, { useContext, useState } from 'react'
-// import { Link } from 'react-router-dom'
 import { ContactContext } from '../context/ContactContext'
 import contactImg from '../images/yuna.jpg'
-
-import { EditContact } from './EditContact'
+import { EditContactForm } from './EditContactForm'
 
 export const ContactDetails = ( { contact } ) => {
     const { dispatch } = useContext( ContactContext )
-    // console.log( contact.id, 'from details' )
 
     const [isEditing, setIsEditing] = useState( false )
 
+    const onClickFunc = ( id ) => {
+        if ( contact.id === id ) {
+            console.log( id, 'this ID clicked' )
+        } else {
+            // console.log( 'this aint working' )
+        }
+    }
 
     return (
         <>
             <div className="contact-details">
-                <li className="collection-item avatar z-depth-4">
-                    <img src={contactImg} alt="contact-avatar" className="circle" />
-                    <span key={contact.id} className="contact">
+                <li key={contact.id} className="collection-item avatar z-depth-3">
+                    <img src={contactImg} alt="contact-avatar"
+                        className="circle" onClick={() => onClickFunc( contact.id )} />
+                    <span className="contact">
                         {contact.name}
                     </span>
                     <p>
@@ -32,12 +37,12 @@ export const ContactDetails = ( { contact } ) => {
                         <i className="material-icons">edit</i>
                     </a>
                 </li>
-            </div>
 
-            {isEditing && <div className="edit-modal">
-                <EditContact contact={contact} />
+                {isEditing && <div className="edit-modal">
+                    <EditContactForm key={contact.id} contact={contact} isEditing={isEditing} setIsEditing={setIsEditing} />
+                </div>
+                }
             </div>
-            }
         </>
     )
 }

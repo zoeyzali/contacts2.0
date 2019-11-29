@@ -1,52 +1,56 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { ContactContext } from '../context/ContactContext'
 import { Button } from 'react-materialize'
 
-export const EditContact = ( { contact } ) => {
-    const { dispatch } = useContext( ContactContext )
-    let initialFormState = {}
+
+export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
+    console.log( contact, 'just the contact object' )
+
+    const { contacts, dispatch } = useContext( ContactContext )
+    let initialEditState = {}
     if ( contact ) {
-        // console.log( contact.name, 'initial state' )
-        initialFormState = {
+        initialEditState = {
             name: contact.name,
             phoneNr: contact.phoneNr,
             email: contact.email,
             id: contact.id,
         }
     }
-    const [currentContact, setCurrentContact] = useState( initialFormState )
-    // console.log( currentContact, 'current' )
-    // console.log( contact.email, 'contact' )
 
+    const [currentContact, setCurrentContact] = useState( initialEditState )
 
     const handleUpdate = ( e ) => {
-        e.persist();
-        setCurrentContact( currentContact => ( {
-            ...currentContact,
+        setIsEditing( true )
+        console.log( contact.id, 'the id of..' )
+        e.persist()
+        setCurrentContact( initialEditState => ( {
+            ...initialEditState,
             [e.target.name]: e.target.value
         } ) )
-        console.log( currentContact.name )
-        console.log( e.target.value )
     }
 
+
     const editContact = ( e ) => {
-        e.preventDefault();
-        console.log( e, 'yao brap' )
+        e.preventDefault()
         dispatch( {
             type: 'EDIT_CONTACT',
             contact: {
                 name: currentContact.name,
                 phoneNr: currentContact.phoneNr,
                 email: currentContact.email,
-                id: currentContact.id
             }
         } )
+        setIsEditing( false )
+        setCurrentContact( currentContact )
+        // console.log( currentContact, 'current' )
     }
+
+
 
     return (
         <>
             <div className="row">
-                <h3>Edit</h3>
+                <h3>Editing</h3>
                 <div className="col s12">
                     <form className="container contact-form center-align">
                         <div className="row">
@@ -92,14 +96,17 @@ export const EditContact = ( { contact } ) => {
                                 <label htmlFor="email" hidden>Email</label>
                             </div>
                         </div>
-                        <Button
+
+                        {isEditing && <Button
                             flat={true}
                             type="submit"
                             className="btn waves-effect waves-light" value="edit contact"
                             onClick={editContact}
                         >
-                            EDIT
+                            Save
                               </Button>
+                        }
+                        <button onClick={() => setIsEditing( isEditing => !isEditing )} className="cancel-btn waves-light">Cancel</button>
                     </form>
                 </div>
             </div>
