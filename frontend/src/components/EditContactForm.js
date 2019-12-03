@@ -7,21 +7,17 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
     const { dispatch } = useContext( ContactContext )
 
     const [currentContact, setCurrentContact] = useState( contact )
-    // const [updatedInputs, setUpdatedInputs] = useState( {} )
 
 
     const handleUpdate = ( e ) => {
         e.persist()
         setIsEditing( true )
-        // setUpdatedInputs( updatedInputs => ( {
-        //     ...updatedInputs,
-        //     [e.target.name]: e.target.value
-        // } ) )
+
         setCurrentContact( currentContact => ( {
             ...currentContact,
             [e.target.name]: e.target.value
         } ) )
-        console.log( e.target.name, 'updated field' )
+        console.log( 'updating field', e.target.name )
     }
 
 
@@ -39,7 +35,7 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
             }
         } )
         setIsEditing( false )
-        console.log( { currentContact }, currentContact, 'event and OBJ' )
+        console.log( { currentContact }, currentContact, 'curr contact and OBJ' )
         // setCurrentContact( { currentContact } )
         // setUpdatedInputs( currentContact => ( {
         //     ...currentContact, ...updatedInputs,
@@ -49,9 +45,9 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
     return (
         <>
             <div className="row">
-                <h3>Editing</h3>
                 <div className="col s12">
-                    <form className="container contact-form center-align">
+                    <h3>Edit Contact</h3>
+                    <form className="container contact-form">
                         <div className="row">
                             <div className="input-field col s6">
                                 <input
@@ -101,12 +97,9 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
                             type="submit"
                             className="btn waves-effect waves-light" value="edit contact"
                             onClick={editContact}
-                        // onClick={() => dispatch( { type: 'EDIT_CONTACT', id: contact.id } )}
-                        >
-                            Save
-                              </Button>
+                        >Save</Button>
                         }
-                        <button onClick={() => setIsEditing( isEditing => !isEditing )} className="cancel-btn waves-light">Cancel</button>
+                        <button onClick={() => setIsEditing( isEditing => !isEditing )} className="cancel-btn waves-light btn-flat">Cancel</button>
                     </form>
                 </div>
             </div>

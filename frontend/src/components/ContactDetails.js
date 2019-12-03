@@ -10,18 +10,10 @@ export const ContactDetails = ( { contact } ) => {
     // console.log( contact, 'the contact' )
     // console.log( { contact }, 'the {contact}?' )
 
-    // const onClickFunc = ( id ) => {
-    //     if ( contact.id === id ) {
-    //         console.log( id, 'from details' )
-    //     } else {
-    //         console.log( 'this aint working' )
-    //     }
-    // }     // onClick={() => onClickFunc( contact.id )}
-
     return (
         <>
             <div className="contact-details">
-                <li key={contact.id} className="collection-item avatar z-depth-3">
+                <li key={contact.id} className="collection-item avatar  z-depth-4">
                     <img src={contactImg} alt="contact-avatar"
                         className="circle" />
                     <span className="contact-item">
@@ -41,8 +33,7 @@ export const ContactDetails = ( { contact } ) => {
                         <i className="material-icons">edit</i>
                     </a>
                 </li>
-
-                {isEditing && <div className="edit-modal">
+                {isEditing && <div className="edit-modal z-depth-3">
                     <EditContactForm key={contact.id} contact={contact} isEditing={isEditing} setIsEditing={setIsEditing} />
                 </div>
                 }

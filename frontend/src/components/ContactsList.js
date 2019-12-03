@@ -11,7 +11,7 @@ const ContactsList = () => {
     return <div className="contacts-list">
         {contacts.length ? (
             <div className="row">
-                <h2>Contacts List</h2>
+                <h2>My Contacts</h2>
                 <ul className="collection">
                     {contacts.map( contact => <ContactDetails key={contact.id}
                         contact={contact}
