@@ -35,7 +35,6 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
             }
         } )
         setIsEditing( false )
-        // console.log( { currentContact }, currentContact, 'curr contact and OBJ' )
     }
 
     return (

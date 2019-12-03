@@ -73,7 +73,7 @@ export const NewContactForm = () => {
                                 />
                                 <label htmlFor="email" hidden>Email</label>
                             </div>
-                            <span class="helper-text" data-error="wrong" data-success="right"></span>
+                            <span className="helper-text" data-error="wrong" data-success="right"></span>
 
                         </div>
                         <Button
