@@ -70,5 +70,8 @@ config
 frontend/src/css/style.css
 
 .DS_Store
+
+node_modules
 mongoConnection.js
+
 

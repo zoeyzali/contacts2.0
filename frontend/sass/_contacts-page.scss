@@ -2,24 +2,34 @@
     .contact-li {
         text-align: center;
         padding: 0.2rem 0;
-    }
 
-    .contact-form,
-    .input.field {
-        font-size: 1rem;
-    }
+        .collection {
+            margin-top: 30px;
+        }
 
+        .contact-details {
+            p .collection-item {
+                font-family: 'Montserrat',
+                    sans-serif;
+            }
+        }
+    }
 
     @media only screen and (min-width: 601px) {
 
         .row .col.m6,
         .col.l6,
         .contact-form {
-            width: 80%;
+            width: 75%;
             margin-left: auto;
             left: auto;
             right: auto;
             text-align: center;
+        }
+
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid #03a9f4;
+            box-shadow: 0 1px 0 0 rgb(236, 236, 236);
         }
     }
 
@@ -37,6 +47,26 @@
 
     .secondary-content.deleteBtn {
         color: crimson;
-        //#db0909bb
+    }
+
+    .secondary-content.editBtn {
+        color: $primary-color;
+    }
+
+    .edit-modal {
+        padding-bottom: 0.5rem;
+        align-items: center;
+    }
+
+    .cancel-btn {
+        background-color: crimson;
+        color: white;
+    }
+
+    .contact-form {
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid #03a9f4;
+            box-shadow: 0 1px 0 0 rgb(236, 236, 236);
+        }
     }
 }

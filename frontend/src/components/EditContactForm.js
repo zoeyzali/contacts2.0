@@ -1,46 +1,57 @@
-import React, { useState, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
-import { Button } from 'react-materialize'
+import React, { useContext, useState } from 'react'
 import { ContactContext } from '../context/ContactContext'
+import { Button } from 'react-materialize'
 
-export const NewContactForm = () => {
+
+export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
     const { dispatch } = useContext( ContactContext )
-    const [name, setName] = useState( '' )
-    const [phoneNr, setPhoneNr] = useState( '' )
-    const [email, setEmail] = useState( '' )
-    const [okToRedirect, setOkToRedirect] = useState( false )
 
-    const handleSubmit = ( e ) => {
+    const [currentContact, setCurrentContact] = useState( contact )
+
+
+    const handleUpdate = ( e ) => {
+        e.persist()
+        setIsEditing( true )
+
+        setCurrentContact( currentContact => ( {
+            ...currentContact,
+            [e.target.name]: e.target.value
+        } ) )
+        // console.log( 'updating field', e.target.name )
+    }
+
+
+    const editContact = ( e ) => {
         e.preventDefault()
         dispatch( {
-            type: 'ADD_CONTACT',
+            type: 'EDIT_CONTACT',
             contact: {
-                name,
-                phoneNr,
-                email
+                // ...contact,
+                ...currentContact,
+                // name: currentContact.name,
+                // phoneNr: currentContact.phoneNr,
+                // email: currentContact.email,
+                // id: currentContact.id
             }
         } )
-        setName( '' )
-        setPhoneNr( '' )
-        setEmail( '' )
-        setOkToRedirect( true )
+        setIsEditing( false )
     }
+
     return (
         <>
-            {okToRedirect && <Redirect to="/contacts" />}
             <div className="row">
-                <h3>Add Contact</h3>
                 <div className="col s12">
-                    <form onSubmit={handleSubmit} className="container contact-form center-align">
+                    <h3>Edit Contact</h3>
+                    <form className="container contact-form">
                         <div className="row">
                             <div className="input-field col s6">
                                 <input
-                                    id="name"
+                                    name="name"
                                     type="text"
                                     placeholder="Jane Doe"
                                     className="validate"
-                                    value={name}
-                                    onChange={( e ) => setName( e.target.value )}
+                                    value={currentContact.name}
+                                    onChange={handleUpdate}
                                     required
                                 />
                                 <label htmlFor="name" hidden>Name</label>
@@ -48,12 +59,12 @@ export const NewContactForm = () => {
 
                             <div className="input-field col s6">
                                 <input
-                                    id="phoneNr"
+                                    name="phoneNr"
                                     type="text"
                                     placeholder="072-978 69 69"
                                     className="validate"
-                                    value={phoneNr}
-                                    onChange={( e ) => setPhoneNr( e.target.value )}
+                                    value={currentContact.phoneNr}
+                                    onChange={handleUpdate}
                                     required
                                 />
                                 <label htmlFor="phoneNr" hidden>PhoneNumber</label>
@@ -63,29 +74,31 @@ export const NewContactForm = () => {
                         <div className="row">
                             <div className="input-field col s12">
                                 <input
-                                    id="email"
+                                    name="email"
                                     type="email"
                                     placeholder="jane@idk.com"
                                     className="validate"
-                                    value={email}
-                                    onChange={( e ) => setEmail( e.target.value )}
+                                    value={currentContact.email}
+
+                                    onChange={handleUpdate}
                                     required
                                 />
                                 <label htmlFor="email" hidden>Email</label>
                             </div>
-                            <span className="helper-text" data-error="wrong" data-success="right"></span>
-
                         </div>
-                        <Button
+
+                        {isEditing && <Button
                             flat={true}
                             type="submit"
-                            value="Add contact"
-                            className="btn waves-effect waves-light">
-                            Add Contact
-                    </Button>
+                            className="btn waves-effect waves-light" value="edit contact"
+                            onClick={editContact}
+                        >Save</Button>
+                        }
+                        <button onClick={() => setIsEditing( isEditing => !isEditing )} className="cancel-btn waves-light btn-flat">Cancel</button>
                     </form>
                 </div>
             </div>
         </>
     )
 }
+
