@@ -1,32 +1,27 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import { ContactContext } from '../context/ContactContext'
 import { Button } from 'react-materialize'
 
 
 export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
-    console.log( contact, 'just the contact object' )
+    const { dispatch } = useContext( ContactContext )
 
-    const { contacts, dispatch } = useContext( ContactContext )
-    let initialEditState = {}
-    if ( contact ) {
-        initialEditState = {
-            name: contact.name,
-            phoneNr: contact.phoneNr,
-            email: contact.email,
-            id: contact.id,
-        }
-    }
+    const [currentContact, setCurrentContact] = useState( contact )
+    // const [updatedInputs, setUpdatedInputs] = useState( {} )
 
-    const [currentContact, setCurrentContact] = useState( initialEditState )
 
     const handleUpdate = ( e ) => {
-        setIsEditing( true )
-        console.log( contact.id, 'the id of..' )
         e.persist()
-        setCurrentContact( initialEditState => ( {
-            ...initialEditState,
+        setIsEditing( true )
+        // setUpdatedInputs( updatedInputs => ( {
+        //     ...updatedInputs,
+        //     [e.target.name]: e.target.value
+        // } ) )
+        setCurrentContact( currentContact => ( {
+            ...currentContact,
             [e.target.name]: e.target.value
         } ) )
+        console.log( e.target.name, 'updated field' )
     }
 
 
@@ -35,17 +30,21 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
         dispatch( {
             type: 'EDIT_CONTACT',
             contact: {
-                name: currentContact.name,
-                phoneNr: currentContact.phoneNr,
-                email: currentContact.email,
+                // ...contact,
+                ...currentContact,
+                // name: currentContact.name,
+                // phoneNr: currentContact.phoneNr,
+                // email: currentContact.email,
+                // id: currentContact.id
             }
         } )
         setIsEditing( false )
-        setCurrentContact( currentContact )
-        // console.log( currentContact, 'current' )
+        console.log( { currentContact }, currentContact, 'event and OBJ' )
+        // setCurrentContact( { currentContact } )
+        // setUpdatedInputs( currentContact => ( {
+        //     ...currentContact, ...updatedInputs,
+        // } ) )
     }
-
-
 
     return (
         <>
@@ -89,7 +88,7 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
                                     placeholder="jane@idk.com"
                                     className="validate"
                                     value={currentContact.email}
-                                    // onChange={( e ) => setCurrentContact( e.target.value )}
+
                                     onChange={handleUpdate}
                                     required
                                 />
@@ -102,6 +101,7 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
                             type="submit"
                             className="btn waves-effect waves-light" value="edit contact"
                             onClick={editContact}
+                        // onClick={() => dispatch( { type: 'EDIT_CONTACT', id: contact.id } )}
                         >
                             Save
                               </Button>

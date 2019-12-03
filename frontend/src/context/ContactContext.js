@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useEffect } from 'react'
 import { contactReducer } from '../reducers/contactReducer'
 
 
+
 export const ContactContext = createContext()
 
 const ContactContextProvider = ( props ) => {
@@ -13,9 +14,13 @@ const ContactContextProvider = ( props ) => {
 
     useEffect( () => {
         localStorage.setItem( 'contacts', JSON.stringify( contacts ) )
+        // contacts.map( contact => {
+        //     console.log( contact, 'mapping contact' )
+        //     return contact
+        // } )
     }, [contacts] )
 
-    // console.log( contacts, 'from context' )
+
     return (
         <ContactContext.Provider value={{ contacts, dispatch }}>
             {props.children}

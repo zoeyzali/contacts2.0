@@ -47,20 +47,28 @@ export default function SideNavMenu( props ) {
                         style={{
                             backgroundColor: "#03a9f4",
                             color: "#fff",
+                            height: "54px"
                         }}>
+                        <i className="material-icons" style={{
+                            color: "#fff"
+                        }}>account_box
+                        </i>
                         Logged in as {user.name}
                     </Link>
                 </li>
+
                 {props.paths.map( ( url, index ) => (
                     <li key={index}
-                        onClick={() => setSlider( s => !s )}
-                        style={{
-                            textTransform: "uppercase",
-                            fontSize: "1rem",
-                            marginTop: "0.6rem"
-                        }}>
+                        onClick={() => setSlider( s => !s )}>
                         <Link className="waves-effect"
-                            to={url.path}>
+                            to={url.path}
+                            style={{
+                                color: "#343434",
+                                textTransform: "uppercase",
+                                fontSize: "1rem",
+                                paddingTop: "0.8rem",
+                                fontWeight: "400"
+                            }}>
                             {url.name}
                         </Link>
                     </li>

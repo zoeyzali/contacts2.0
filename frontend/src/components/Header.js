@@ -12,7 +12,7 @@ export const Header = () => {
         },
         {
             name: "Contacts",
-            path: "/contacts"
+            path: "/contacts/"
         },
         {
             name: "Add Contact",
@@ -27,7 +27,7 @@ export const Header = () => {
     // const { user } = useContext( UserContext )
     return (
         <Row>
-            <SideNavMenu paths={menuPaths} title="Menu" />
+            <SideNavMenu paths={menuPaths} title="Menu" style={{ color: "#03a9f4" }} />
         </Row>
     )
 }

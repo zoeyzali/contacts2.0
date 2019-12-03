@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { Redirect } from 'react-router-dom'
 import { Button } from 'react-materialize'
 import { ContactContext } from '../context/ContactContext'
 
@@ -7,6 +8,7 @@ export const NewContactForm = () => {
     const [name, setName] = useState( '' )
     const [phoneNr, setPhoneNr] = useState( '' )
     const [email, setEmail] = useState( '' )
+    const [okToRedirect, setOkToRedirect] = useState( false )
 
     const handleSubmit = ( e ) => {
         e.preventDefault()
@@ -21,9 +23,11 @@ export const NewContactForm = () => {
         setName( '' )
         setPhoneNr( '' )
         setEmail( '' )
+        setOkToRedirect( true )
     }
     return (
         <>
+            {okToRedirect && <Redirect to="/contacts" />}
             <div className="row">
                 <h3>Add Contact</h3>
                 <div className="col s12">

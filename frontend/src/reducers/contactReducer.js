@@ -1,7 +1,7 @@
 import uuid from 'uuid/v1'
 
 export const contactReducer = ( state, action ) => {
-    console.log( action, 'action reducer' )
+    // console.log( action, state, 'action & state from reducer' )
     switch ( action.type ) {
         case 'ADD_CONTACT':
             return [...state, {
@@ -15,22 +15,26 @@ export const contactReducer = ( state, action ) => {
             return state.filter( contact => contact.id !== action.id )
 
         case 'EDIT_CONTACT':
-            return [...state, {
-                name: action.contact.name,
-                phoneNr: action.contact.phoneNr,
-                email: action.contact.email,
-                id: action.contact.id
-            }]
-        // return state.map( contact => contact.id === action.id )
-        // console.log( contact, 'this contact payload..' )
-        // const { name, phoneNr, email, id } = action.contact;
-        // if ( contact.id === id ) {
-        //     contact.name = name
-        //     contact.phoneNr = phoneNr
-        //     contact.email = email
-
-        // } )
-
+            return state.map( contact => {
+                console.log( contact.id, 'from map' )
+                if ( contact.id === action.contact.id ) {
+                    return {
+                        name: action.contact.name,
+                        phoneNr: action.contact.phoneNr,
+                        email: action.contact.email,
+                        id: action.contact.id
+                    }
+                } else {
+                    console.log( state, 'aint working' )
+                    return contact
+                }
+            } )
+        // return [{
+        //     name: action.contact.name,
+        //     phoneNr: action.contact.phoneNr,
+        //     email: action.contact.email,
+        //     id: action.contact.id
+        // }]
         default:
             return state
     }

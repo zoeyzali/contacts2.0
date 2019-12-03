@@ -5,15 +5,14 @@ import { UserContextProvider } from './context/UserContext'
 import ContactContextProvider from './context/ContactContext'
 import { Header } from './components/Header'
 import { HomePage } from './components/HomePage'
-
 import ContactsList from './components/ContactsList'
 import { NewContactForm } from './components/ContactForm'
 import Stuff from './components/Stuff'
+import { ContactDetails } from './components/ContactDetails'
 // import { EditContactForm } from './components/EditContactForm'
 
 
-
-function App() {
+function App( contact ) {
     return (
         <UserContextProvider>
             <Router>
@@ -22,8 +21,9 @@ function App() {
                     <div className="container-margin">
                         <ContactContextProvider>
                             <Route exact path="/" component={HomePage} />
-                            <Route exact path="/contacts" component={ContactsList} />
                             <Route exact path="/contacts/add" component={NewContactForm} />
+                            <Route exact path="/contacts" component={ContactsList} />
+                            <Route exact path={`/contacts/${contact.id}`} component={ContactDetails} />
                             {  // <Route exact path="/contacts/edit" component={EditContactForm} />
                             }
                             <Route exact path="/stuff" component={Stuff} />

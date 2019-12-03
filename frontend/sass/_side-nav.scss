@@ -1,12 +1,14 @@
 .nav-header {
     .logo-brand {
         text-decoration: none;
-        height: 50px;
+        height: 100px;
         width: 50px;
         position: absolute;
         top: 4px;
         right: 10px;
     }
+
+
 
     ul#slide-out {
         a.user-info {
@@ -14,20 +16,19 @@
         }
 
         .sidenav li>a {
-            margin-top: 0.2rem;
             text-transform: uppercase !important;
             font-size: 1rem;
             line-height: 52px !important;
+            font-family: 'Montserrat', sans-serif;
         }
     }
-
-
 
     nav {
         background-color: $primary-color;
         position: absolute;
         top: 15px;
         left: 15px;
+        height: 60px;
     }
 
     .logout-btn {

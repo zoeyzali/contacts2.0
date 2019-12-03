@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { ContactContext } from '../context/ContactContext'
 import { ContactDetails } from './ContactDetails'
 
+
+
 const ContactsList = () => {
     const { contacts } = useContext( ContactContext )
 
@@ -11,12 +13,9 @@ const ContactsList = () => {
             <div className="row">
                 <h2>Contacts List</h2>
                 <ul className="collection">
-                    {contacts.map( ( contact, i ) => {
-                        return (
-                            <ContactDetails key={contact.id}
-                                contact={contact}
-                            /> )
-                    } )}
+                    {contacts.map( contact => <ContactDetails key={contact.id}
+                        contact={contact}
+                    /> )}
                 </ul>
             </div>
         ) : (
