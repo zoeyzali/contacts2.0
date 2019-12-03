@@ -17,7 +17,7 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
             ...currentContact,
             [e.target.name]: e.target.value
         } ) )
-        console.log( 'updating field', e.target.name )
+        // console.log( 'updating field', e.target.name )
     }
 
 
@@ -35,11 +35,7 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
             }
         } )
         setIsEditing( false )
-        console.log( { currentContact }, currentContact, 'curr contact and OBJ' )
-        // setCurrentContact( { currentContact } )
-        // setUpdatedInputs( currentContact => ( {
-        //     ...currentContact, ...updatedInputs,
-        // } ) )
+        // console.log( { currentContact }, currentContact, 'curr contact and OBJ' )
     }
 
     return (

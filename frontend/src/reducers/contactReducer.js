@@ -24,7 +24,7 @@ export const contactReducer = ( state, action ) => {
                         id: action.contact.id
                     }
                 } else {
-                    console.log( 'aint working' )
+                    // console.log( 'aint working' )
                     return contact
                 }
             } )
