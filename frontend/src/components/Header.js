@@ -27,7 +27,8 @@ export const Header = () => {
     // const { user } = useContext( UserContext )
     return (
         <Row>
-            <SideNavMenu paths={menuPaths} title="Menu" style={{ color: "#03a9f4" }} />
+            <SideNavMenu paths={menuPaths} title="Menu"
+                style={{ color: "#03a9f4" }} />
         </Row>
     )
 }

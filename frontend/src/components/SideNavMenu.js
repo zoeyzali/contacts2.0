@@ -43,15 +43,16 @@ export default function SideNavMenu( props ) {
                 }}
             >
                 <li>
-                    <Link className="user-info" to="/"
+                    <Link to="/contacts" className="user-info"
                         style={{
                             backgroundColor: "#03a9f4",
                             color: "#fff",
                             height: "54px"
                         }}>
-                        <i className="material-icons" style={{
-                            color: "#fff"
-                        }}>account_box
+                        <i className="material-icons"
+                            style={{
+                                color: "#fff"
+                            }}>account_box
                         </i>
                         Logged in as {user.name}
                     </Link>
@@ -77,12 +78,24 @@ export default function SideNavMenu( props ) {
                     <div className="divider" />
                 </li>
                 <li>
-                    <Button
-                        flat={true}
-                        className="logout-btn">
-                        Sign out
-                        <i className="material-icons">logout</i>
-                    </Button>
+                    <Link to="/login"
+                        className="login-link">
+                        <i className="material-icons" style={{
+                            color: "#03a9f4",
+                            verticalAlign: "middle",
+                            marginBottom: "0.2rem",
+                            fontSize: "1.5rem"
+                        }}>account_circle</i>
+                        Sign In
+                    </Link>
+                    {!user &&
+                        <Button
+                            flat={true}
+                            className="logout-btn">
+                            <i className="material-icons">logout</i>
+                            Sign out
+                        </Button>
+                    }
                 </li>
             </ul>
         </>

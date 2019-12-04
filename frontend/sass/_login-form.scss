@@ -1,0 +1,16 @@
+.login-form {
+    background-color: #f6f6f6;
+    padding: 39px 37px 50px;
+    border: 1px solid #eee;
+    width: 80%;
+    min-height: 400px;
+    max-width: 421px;
+    position: relative;
+    border-radius: 3px;
+
+    .loginBtn {
+        width: 90%;
+        background-color: $primary-color;
+        color: #fff;
+    }
+}
