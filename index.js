@@ -17,13 +17,19 @@ for ( let conf of config.sass ) {
     new Sass( conf )
 }
 
+let dbName = "Contacto"
 mongoose.connect( URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
-},
-    console.log( 'DB is On' ) )
+} )
 const db = mongoose.connection
+db.once( 'open', _ => {
+    console.log( `DB ${dbName} is ON` )
+} )
+db.on( 'error', err => {
+    console.error( 'connection error:', err )
+} )
 mongoose.Promise = global.Promise
 
 

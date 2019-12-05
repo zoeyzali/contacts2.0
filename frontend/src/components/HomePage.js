@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../context/UserContext'
-import Stuff from './Stuff'
+// import Stuff from './Stuff'
 
 
 export const HomePage = () => {
     const { user } = useContext( UserContext )
-    const [inputValue, setValue] = useState( "reactjs" )
-    const [subreddit, setSubreddit] = useState( inputValue )
+    // const [inputValue, setValue] = useState( "reactjs" )
+    // const [subreddit, setSubreddit] = useState( inputValue )
 
-    const handleSubmit = ( e ) => {
-        e.preventDefault()
-        setSubreddit( inputValue )
-    }
+    // const handleSubmit = ( e ) => {
+    //     e.preventDefault()
+    //     setSubreddit( inputValue )
+    // }
 
     return <>
         {user &&

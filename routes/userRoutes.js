@@ -22,7 +22,7 @@ router.post( '/', async ( req, res ) => {
     let email = req.body.email
     let user = await User.findOne( { email } )
     if ( user ) {
-        return res.status( 400 ).send( 'Email exists' )
+        return res.status( 404 ).json( { error: 'Email exists' } )
     } else {
         user = new User( {
             ...req.body,
@@ -43,7 +43,7 @@ router.post( '/login', async ( req, res ) => {
         password = encryptPassword( password )
         const user = await User.findOne( { email } )
         if ( !user ) {
-            return res.status( 404 ).json( 'No such user' )
+            return res.status( 404 ).json( { error: 'No such user, please Signup!' } )
         }
         if ( user ) {
             if ( user.password === password ) {
@@ -51,13 +51,13 @@ router.post( '/login', async ( req, res ) => {
                 console.log( 'login route user', user )
                 return res.status( 200 ).json( {
                     user,
-                    loginInfo: `Logged in as ${user.name}`
+                    loginInfo: `Login as ${user.name} successful`
                 } )
             }
         }
         if ( user.password !== password ) {
             return res.status( 400 ).json( {
-                loginErr: "Email or password donot match"
+                loginErr: "Credentials incorrect, please try again"
             } )
         }
     }

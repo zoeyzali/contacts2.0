@@ -4,10 +4,10 @@ export const UserContext = createContext()
 
 export const UserContextProvider = ( props ) => {
     const [user, setUser] = useState( {
-        name: "Zoe Bowie",
-        email: "zoeecoding@gmail.com",
-        phoneNr: "072-978 00 00",
-        id: 1
+        // name: "Zoe Bowie",
+        // email: "zoeecoding@gmail.com",
+        // phoneNr: "072-978 00 00",
+        // id: 1
     } )
 
     const keepAuthUser = ( user ) => {
