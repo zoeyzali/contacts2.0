@@ -51,11 +51,10 @@ export const LoginForm = () => {
             <div className="container login-form">
                 <h3>Sign In</h3>
                 {errorMssg && (
-                    <span className="form-error"
+                    <h4 className="form-error"
                         style={{
                             color: "crimson",
-                            fontSize: "1.5rem"
-                        }}>{errorMssg}</span>
+                        }}>{errorMssg}</h4>
                 )}
                 <div className="row">
                     <form onSubmit={handleSubmit} className="col s12">
@@ -92,7 +91,8 @@ export const LoginForm = () => {
                         </Button>
                         <Button
                             flat={true}
-                            className="flatBtns" waves="light" style={{
+                            className="flatBtns"
+                            style={{
                                 marginTop: "15px",
                                 backgroundColor: "white",
                                 color: "#03a9f4",

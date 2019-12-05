@@ -10,6 +10,7 @@ import { NewContactForm } from './components/ContactForm'
 import Stuff from './components/Stuff'
 import { ContactDetails } from './components/ContactDetails'
 import { LoginForm } from './components/LoginForm'
+import SignUpForm from './components/SignUpForm'
 
 
 function App( contact ) {
@@ -20,12 +21,13 @@ function App( contact ) {
                     <Header />
                     <div className="container-margin">
                         <ContactContextProvider>
-                            <Route exact path="/login/" component={LoginForm} />
+                            <Route exact path="/login" component={LoginForm} />
                             <Route exact path="/" component={HomePage} />
                             <Route exact path="/contacts/add" component={NewContactForm} />
                             <Route exact path="/contacts" component={ContactsList} />
                             <Route exact path={`/contacts/${contact.id}`} component={ContactDetails} />
                             <Route exact path="/stuff" component={Stuff} />
+                            <Route exact path="/signup" component={SignUpForm} />
                         </ContactContextProvider>
                     </div>
                 </section>

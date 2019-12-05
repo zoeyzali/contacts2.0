@@ -1,13 +1,62 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Button } from 'react-materialize'
+import useSignUp from './useSignUp'
+
 
 const SignUpForm = () => {
+    const [mssg, setMssg] = useState( null )
+    const [redirect, setRedirect] = useState( false )
+    const registerUser = async () => {
+        try {
+            const user = {
+                name: data.name,
+                phone: data.phone,
+                email: data.email,
+                password: data.password
+            }
+            const response = await fetch( 'http://localhost:5000/users/', {
+                method: 'POST',
+                body: JSON.stringify( user ),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            } )
+            const result = { res: await response.json(), status: response.status }
+            if ( !result ) {
+                setMssg( "Oopsie" )
+            }
+            if ( result.status === 404 ) {
+                setMssg( result.res.signUpErr )
+            }
+            if ( result.status === 200 ) {
+                setRedirect( result.res.successMssg )
+            }
+            console.log( result.res.user )
+        } catch ( error ) {
+            console.log( error, 'err' )
+        }
+    }
+
+    const { data, handleInputChange, handleSubmit } = useSignUp( registerUser )
+
+
     return (
         <>
-            <div className="container signup-page">
+            <div className="container signup-page login-form">
                 <div className="row">
                     <h3>Signup!</h3>
-                    <form onSubmit={handleSubmit} className="col s12">
 
+                    {mssg && (
+                        <h4 className="errMssg" style={{ color: "crimson" }}>{mssg}</h4>
+                    )}
+                    {redirect && (
+                        <h4 className="success" style={{ color: "green" }}>{redirect} {" "}
+                            <Link to="/login">Go to Login</Link>
+                        </h4>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="col s12">
                         <div className="row">
                             <div className="input-field col s12">
                                 <input
@@ -28,7 +77,7 @@ const SignUpForm = () => {
                                     name="phone"
                                     placeholder="072-978 00 00"
                                     id="phone"
-                                    type="phone"
+                                    type="text"
                                     className="validate"
                                     value={data.phone}
                                     onChange={handleInputChange}
@@ -63,11 +112,17 @@ const SignUpForm = () => {
                                 />
                             </div>
                         </div>
-
                         <Button
-                            disabled={true}
+                            // disabled={true}
                             flat={true}
-                            className="waves-effect waves-light signupBtn">Signup
+                            className="flatBtns"
+                            style={{
+                                width: "80%",
+                                justifyContent: "center",
+                                backgroundColor: "#fff",
+                                color: "#03a9f4"
+                            }}>
+                            Signup
                         </Button>
                     </form>
                 </div>

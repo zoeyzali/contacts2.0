@@ -22,8 +22,10 @@ router.post( '/', async ( req, res ) => {
     let email = req.body.email
     let user = await User.findOne( { email } )
     if ( user ) {
-        return res.status( 404 ).json( { error: 'Email exists' } )
-    } else {
+        res.status( 404 ).json( { signUpErr: 'Email exists' } )
+        // return res.redirect( '/login' )
+    }
+    else {
         user = new User( {
             ...req.body,
             password: encryptPassword( req.body.password )
@@ -31,7 +33,7 @@ router.post( '/', async ( req, res ) => {
     }
     await user.save()
     res.status( 200 ).json( {
-        message: 'User signed up!',
+        successMssg: 'User signed up!',
         user: user,
     } )
 } )
@@ -43,7 +45,7 @@ router.post( '/login', async ( req, res ) => {
         password = encryptPassword( password )
         const user = await User.findOne( { email } )
         if ( !user ) {
-            return res.status( 404 ).json( { error: 'No such user, please Signup!' } )
+            return res.status( 404 ).json( { error: 'No such user, Please Signup!' } )
         }
         if ( user ) {
             if ( user.password === password ) {
@@ -57,12 +59,12 @@ router.post( '/login', async ( req, res ) => {
         }
         if ( user.password !== password ) {
             return res.status( 400 ).json( {
-                loginErr: "Credentials incorrect, please try again"
+                loginErr: "Credentials Incorrect, please try again"
             } )
         }
     }
     catch ( error ) {
-        console.log( error, 'Catching errors at login route' )
+        console.log( error, 'Catching errors at loginroute' )
     }
 } )
 
