@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Button } from 'react-materialize'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import useLoginHook from './useLogin'
 import { UserContext } from '../context/UserContext'
 
@@ -88,11 +88,17 @@ export const LoginForm = () => {
                         <Button
                             disabled={data.isSubmitting}
                             flat={true}
-                            className="waves-effect waves-light loginBtn">
-                            {data.isSubmitting ? (
-                                "Submitting..."
-                            ) : ( "Sign In"
-                                )}
+                            className="waves-effect waves-light loginBtn">Login
+                        </Button>
+                        <Button
+                            flat={true}
+                            className="flatBtns" waves="light" style={{
+                                marginTop: "15px",
+                                backgroundColor: "white",
+                                color: "#03a9f4",
+                                width: "90%"
+                            }}>
+                            <Link to="/signup">SignUp</Link>
                         </Button>
                     </form>
                 </div>
