@@ -7,8 +7,8 @@ const Stuff = ( { subreddit } ) => {
             const res = await fetch( `https://www.reddit.com/r/${subreddit}.json` )
 
             const json = await res.json()
-            // console.log( json.data.children, 'ex reddit posts' )
-            setPosts( json.data.children.map( c => c.data ) )
+            // setPosts( json.data.children.map( c => c.data ) )
+            // console.log( json.data.children, 'reddit posts' )
         }
         fetchData()
         console.log( posts, 'useeffect running' )
