@@ -38,7 +38,7 @@ app.use( session( {
     resave: true,
     saveUninitialized: false,
     // true on https:// servers
-    cookie: { secure: false, maxAge: null },
+    cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 },
     store: new connectMongo( {
         mongooseConnection: db
     } )
@@ -52,6 +52,12 @@ app.use( '/contacts', Contact )
 
 
 // test route
+
+// app.get( '/', function ( req, res, next ) {
+//     res.setHeader( 'Last-Modified', ( new Date() ).toUTCString() )
+//     next()
+// } )
+
 app.get( '/api', ( req, res ) =>
     res.send( 'Welcome to Contacts2.0' )
 )

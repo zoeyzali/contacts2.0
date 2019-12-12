@@ -2,28 +2,31 @@ import React, { createContext, useState, useEffect } from 'react'
 
 export const UserContext = createContext()
 
-export const UserContextProvider = ( props ) => {
-    const [user, setUser] = useState( {
-        // name: "Zoe Bowie",
-        // email: "zoeecoding@gmail.com",
-        // phoneNr: "072-978 00 00",
-        // id: 1
-    } )
-
+const UserContextProvider = ( props ) => {
+    const [user, setUser] = useState( {},
+        () => {
+            const localData = localStorage.getItem( 'user' )
+            return localData ? JSON.parse( localData ) : {}
+        } )
 
     useEffect( () => {
         localStorage.setItem( 'user', JSON.stringify( user ) )
     }, [user] )
 
     const keepAuthUser = ( user ) => {
-        console.log( user, 'the user' )
         setUser( user )
     }
 
+    const destroyAuthUser = () => {
+        localStorage.clear()
+        setUser( "" )
+    }
+
     return (
-        <UserContext.Provider value={{ user, keepAuthUser }}>
+        <UserContext.Provider value={{ user, keepAuthUser: keepAuthUser, destroyAuthUser }}>
             {props.children}
         </UserContext.Provider>
     )
 }
 
+export default UserContextProvider

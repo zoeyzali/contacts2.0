@@ -14,18 +14,37 @@ function encryptPassword( password ) {
         .digest( 'hex' )
 }
 
-router.get( '/', ( req, res ) => {
+
+router.get( '/testing-users', ( req, res ) => {
     let message = `Users route at ${req.url}`
     res.status( 200 ).json( { Date: new Date().toLocaleDateString(), message } )
 } )
 
 
+router.get( '/', async ( req, res ) => {
+    const users = await User.find( {} )
+    if ( users.length > 0 ) {
+        console.log( users.length, 'user count' )
+        return res.status( 200 ).json( {
+            users,
+            dbMssg: 'users from db',
+            user: users[0],
+        } )
+    } else {
+        return res.status( 400 ).json( {
+            dbMssg: 'No users in the DB'
+        } )
+    }
+} )
+
+// register user
 router.post( '/', async ( req, res ) => {
     let email = req.body.email
     let user = await User.findOne( { email } )
     if ( user ) {
-        res.status( 404 ).json( { signUpErr: 'Email exists' } )
-        // return res.redirect( '/login' )
+        res.status( 404 ).json( {
+            signUpErr: 'Email exists'
+        } )
     }
     else {
         user = new User( {
@@ -40,19 +59,20 @@ router.post( '/', async ( req, res ) => {
     } )
 } )
 
-
+// user login
 router.post( '/login', async ( req, res ) => {
     try {
         let { email, password } = req.body
         password = encryptPassword( password )
         const user = await User.findOne( { email } )
         if ( !user ) {
-            return res.status( 404 ).json( { error: 'No such user, Please Signup!' } )
+            return res.status( 404 ).json( {
+                error: 'No such user, Please Signup!'
+            } )
         }
         if ( user ) {
             if ( user.password === password ) {
                 req.session.user = user
-                console.log( 'login route user', user )
                 return res.status( 200 ).json( {
                     user,
                     loginInfo: `Login as ${user.name} successful`
@@ -61,21 +81,27 @@ router.post( '/login', async ( req, res ) => {
         }
         if ( user.password !== password ) {
             return res.status( 400 ).json( {
-                loginErr: "Credentials Incorrect, please try again"
+                loginErr: "Credentials Incorrect? Please try again!"
             } )
         }
-    }
-    catch ( error ) {
-        console.log( error, 'Catching errors at loginroute' )
+    } catch ( error ) {
+        return res.send( 'Catching errors' )
     }
 } )
 
-router.get( '/login', async ( req, res ) => {
-    let loginErr = "Not logged in!"
-    res.json( req.session.user ? req.session.user : { loginErr } )
+
+router.get( '/login', ( req, res ) => {
+    const { user } = req.session
+    if ( !user ) {
+        return res.status( 404 ).send( 'Not logged in' )
+    } else {
+        console.log( `the logged in user is ${user.name}` )
+        return res.status( 200 ).json(
+            user ? user : null )
+    }
 } )
 
-router.get( '/logout', async ( req, res ) => {
+router.get( '/logout', ( req, res ) => {
     const { user } = req.session
     if ( user ) {
         req.session.destroy()
@@ -83,26 +109,45 @@ router.get( '/logout', async ( req, res ) => {
             message: `${user.name} Logged out!`
         } )
     } else {
-        res.status( 400 ).end()
+        return res.status( 400 ).end()
     }
 } )
 
 
-// user by Id
-router.get( '/:id', async ( req, res ) => {
-    let user = await User.findOne( { _id: req.params.id } )
-    if ( user && String( user._id ) === req.session.user._id ) {
-        // console.log( req.session.user._id, 'the sesssh' )
-        res.status( 200 ).json( {
-            userInfo: `Logged in as ${user.name} with email ${user.email}`,
-            userId: user._id,
-            user: user,
-            contacts: user.contacts
-        } )
-    } else {
-        return res.status( 401 ).json( { error: 'Not logged In' } )
+// logged in user's contacts
+router.get( '/:id/contacts', async ( req, res ) => {
+    const { user } = req.session
+    let errorMssg = 'some bullshit shit'
+
+    if ( !user ) {
+        return res.status( 400 ).json( 'Make sure to login!' )
+    }
+    try {
+        const currentUser = await User.findById( user._id )
+            .populate( {
+                path: 'userContacts',
+                populate: {
+                    path: "creator",
+                    model: "User"
+                }
+            } )
+        if ( user && String( user._id ) === req.session.user._id ) {
+            let contacts = currentUser.userContacts
+            console.log( contacts[0].creator.name, 'con length' )
+            return res.status( 200 ).json( {
+                // user: contacts[0].creator,
+                contacts,
+                errorMssg,
+            } )
+        } else {
+            return res.send( errorMssg )
+        }
+    } catch ( error ) {
+        console.log( error, 'catch error' )
     }
 } )
+
+
 
 router.delete( '/:id', async ( req, res ) => {
     let user = await User.findOneAndDelete( { _id: req.params.id } )
@@ -115,34 +160,9 @@ router.delete( '/:id', async ( req, res ) => {
     if ( !user ) {
         return res.status( 404 ).send( 'No such user' )
     }
-
 } )
 
 
-
-// get users all contacts
-router.get( '/:id/contacts', async ( req, res ) => {
-    const { user } = req.session
-    if ( !user ) {
-        return res.status( 401 ).send( { error: 'You are not logged in' } )
-    }
-    if ( user ) {
-        let userContacts = await User.findById( user._id ).populate( 'contacts' )
-        let contacts = await Contact.find( {} )
-        console.log( userContacts, "user's all contacts?" )
-        if ( contacts.length > 0 ) {
-            return res.status( 200 ).json( {
-                message: `You have ${userContacts.contacts.length} contacts saved`,
-                userContacts
-            } )
-        }
-    } else {
-        // console.log( "you don't seem to be logged in?" )
-        return res.status( 404 ).json( {
-            error: 'No contacts found'
-        } )
-    }
-} )
 
 // add contact to logged in User
 router.post( '/:id/add-contact', async ( req, res ) => {
@@ -151,28 +171,26 @@ router.post( '/:id/add-contact', async ( req, res ) => {
         return res.status( 400 ).send( 'You must be logged in' )
     }
     const currentUser = await User.findById( user._id )
-    console.log( currentUser, 'current' )
-    const userContact = await Contact.findOne( { email: req.body.email }
-    )
+    const userContact = await Contact.findOne( { email: req.body.email } )
 
     if ( !userContact ) {
         return res.status( 404 ).send( { error: 'No such contact' } )
     }
+
     if ( currentUser.contacts.includes( userContact._id ) ) {
         return res.status( 500 ).send( {
             error: 'Contact has already been added',
         } )
     }
-
     currentUser.contacts.push( userContact )
     currentUser.save()
 
     res.json( {
         message: 'Contact added to your list',
-        currentUser,
-        userContact
+        user: currentUser,
+        // contact: userContact,
     } )
-    res.status( 200 ).end()
+    return res.status( 200 ).end()
 } )
 
 

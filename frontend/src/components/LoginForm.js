@@ -5,29 +5,32 @@ import useLoginHook from './useLogin'
 import { UserContext } from '../context/UserContext'
 
 export const LoginForm = () => {
-    const { user, keepAuthUser } = useContext( UserContext )
+    const { keepAuthUser } = useContext( UserContext )
     const [errorMssg, setErrorMssg] = useState( null )
     const [okToRedirect, setOkToRedirect] = useState( false )
 
     const onLogin = async () => {
-        const user = {
+        const userData = {
             email: data.email,
             password: data.password,
         }
-        const response = await fetch( ' http://localhost:5000/users/login', {
+        const response = await fetch( 'http://localhost:5000/users/login', {
             method: 'POST',
-            body: JSON.stringify( user ),
+            body: JSON.stringify( userData ),
             headers: {
                 'Content-Type': 'application/json'
             }
         } )
-        const result = { res: await response.json(), status: response.status }
+        const result = {
+            res: await response.json(),
+            status: response.status
+        }
         if ( result.status === 200 ) {
-            let user = result.res.user
-            keepAuthUser( user )
-            // console.log( user, 'login user res' )
-            setErrorMssg( false )
+            keepAuthUser( result.res.user )
             setOkToRedirect( true )
+            // setErrorMssg( false )
+            // console.log( 'logging result', result )
+
         }
         if ( result.status === 400 ) {
             setErrorMssg( result.res.loginErr )
@@ -44,16 +47,18 @@ export const LoginForm = () => {
 
     const { handleInputChange, handleSubmit, data } = useLoginHook( onLogin )
 
+    // {user ? <Redirect to='/' /> : null}
+
 
     return (
         <>
             {okToRedirect && <Redirect to="/" />}
-            <div className="container login-form">
+            <div className="container all-form">
                 <h3>Sign In</h3>
                 {errorMssg && (
                     <h4 className="form-error"
                         style={{
-                            color: "crimson",
+                            color: "crimson"
                         }}>{errorMssg}</h4>
                 )}
                 <div className="row">
@@ -85,7 +90,7 @@ export const LoginForm = () => {
                             </div>
                         </div>
                         <Button
-                            disabled={data.isSubmitting}
+                            // disabled={data.isSubmitting}
                             flat={true}
                             className="waves-effect waves-light loginBtn">Login
                         </Button>

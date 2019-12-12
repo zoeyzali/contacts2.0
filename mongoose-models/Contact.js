@@ -16,11 +16,12 @@ const contactSchema = new Schema( {
         type: String,
         required: true
     },
-    user: {
+    creator: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-    }
+    },
 } )
+
 
 let Contact = mongoose.model( 'Contact', contactSchema )
 module.exports = Contact

@@ -43,7 +43,7 @@ const SignUpForm = () => {
 
     return (
         <>
-            <div className="container signup-page login-form">
+            <div className="container signup-page all-form">
                 <div className="row">
                     <h3>Signup!</h3>
 

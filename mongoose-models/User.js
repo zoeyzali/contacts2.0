@@ -33,11 +33,20 @@ const userSchema = new Schema( {
     toJSON: { virtuals: true },
 } )
 
-userSchema.virtual( 'myContacts', {
+
+userSchema.virtual( 'userContacts', {
     ref: 'Contact',
     localField: '_id',
-    foreignField: 'contact'
+    foreignField: 'creator'
 } )
+
+userSchema.methods.toJSON = function () {
+    var obj = this.toObject();
+    delete obj.password;
+    // delete obj.isAdmin;
+    return obj;
+}
+
 
 
 

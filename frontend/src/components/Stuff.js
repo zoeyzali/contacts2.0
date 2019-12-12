@@ -1,30 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
+// import FetchContacts from './FetchContacts'
 
-const Stuff = ( { subreddit } ) => {
-    const [posts, setPosts] = useState( [] )
-    useEffect( () => {
-        //https://www.reddit.com/r/${subreddit}.json
-        const fetchData = async () => {
-            const res = await fetch( ` http://localhost:5000/users/5dea787ec9671cfba72c0050/contacts` )
-            const json = await res.json()
-            console.log( json, 'user\'s contacts' )
-            // setPosts( json.data.children.map( c => c.data ) )
-            // console.log( json.data.children, 'reddit posts' )
-        }
-        fetchData()
-        // console.log( posts, 'useeffect running' )
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [subreddit, setPosts] )
+
+
+const Stuff = () => {
+    const { user } = useContext( UserContext )
 
     return <>
-        <div className="stuff-page">
+        {user ? <div className="stuff-page">
             <h2> & Other Stuff</h2>
-            <ul>{posts.map( post => (
-                <li key={post.id}>{post.title}</li>
-            ) )}
-            </ul>
+            {            // <FetchContacts />
+            }
         </div>
+            : <h4>No results found</h4>
+        }
     </>
 }
 
-export default Stuff;
+export default Stuff

@@ -9,7 +9,16 @@ import { Button } from 'react-materialize'
 export default function SideNavMenu( props ) {
     const [slider, setSlider] = useState( false )
     const size = useNavHooks()
-    const { user } = useContext( UserContext )
+    const { user, destroyAuthUser } = useContext( UserContext )
+    // const user = props.user
+
+    const handleLogout = async () => {
+        const response = await fetch( "http://localhost:5000/users/logout" )
+        console.log( response, 'logout' )
+        if ( response.status === 200 ) {
+            destroyAuthUser()
+        }
+    }
 
     return (
         <>
@@ -78,6 +87,15 @@ export default function SideNavMenu( props ) {
                     <div className="divider" />
                 </li>
                 <li>
+                    {user && (
+                        <Button
+                            flat={true}
+                            className="logout-btn flatBtns"
+                            onClick={handleLogout}>
+                            <i className="material-icons">logout</i>
+                            Sign out
+                        </Button>
+                    )}
                     <Link to="/login"
                         className="login-link">
                         <i className="material-icons" style={{
@@ -88,14 +106,6 @@ export default function SideNavMenu( props ) {
                         }}>account_circle</i>
                         Sign In
                     </Link>
-                    {!user &&
-                        <Button
-                            flat={true}
-                            className="logout-btn">
-                            <i className="material-icons">logout</i>
-                            Sign out
-                        </Button>
-                    }
                 </li>
             </ul>
         </>

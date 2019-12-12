@@ -1,7 +1,6 @@
 import uuid from 'uuid/v1'
 
 export const contactReducer = ( state, action ) => {
-    // console.log( action, state, 'action & state from reducer' )
     switch ( action.type ) {
         case 'ADD_CONTACT':
             return [...state, {
