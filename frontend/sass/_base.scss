@@ -34,8 +34,8 @@ h4 {
 
 .flatBtns {
     background-color: #fff;
-    color: $secondary-color;
-    border: 1px solid transparentize($secondary-color, 0.7);
+    color: $primary-color;
+    border: 2px solid transparentize($primary-color, 0.7);
 
     &:hover {
         background-color: #fff;

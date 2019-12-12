@@ -1,6 +1,8 @@
 const express = require( 'express' )
 const router = express.Router()
 const User = require( '../mongoose-models/User' )
+const Contact = require( '../mongoose-models/Contact' )
+
 const crypto = require( 'crypto' )
 const salt = 'hellofromtheotherside'
 
@@ -78,7 +80,7 @@ router.get( '/logout', async ( req, res ) => {
     if ( user ) {
         req.session.destroy()
         return res.status( 200 ).json( {
-            message: 'Logged out!'
+            message: `${user.name} Logged out!`
         } )
     } else {
         res.status( 400 ).end()
@@ -90,11 +92,12 @@ router.get( '/logout', async ( req, res ) => {
 router.get( '/:id', async ( req, res ) => {
     let user = await User.findOne( { _id: req.params.id } )
     if ( user && String( user._id ) === req.session.user._id ) {
-        console.log( req.session.user._id, 'the sesssh' )
+        // console.log( req.session.user._id, 'the sesssh' )
         res.status( 200 ).json( {
-            // user: user,
-            userInfo: `Logged in as ${user.name} & email ${user.email}`,
-            userId: user._id
+            userInfo: `Logged in as ${user.name} with email ${user.email}`,
+            userId: user._id,
+            user: user,
+            contacts: user.contacts
         } )
     } else {
         return res.status( 401 ).json( { error: 'Not logged In' } )
@@ -109,9 +112,68 @@ router.delete( '/:id', async ( req, res ) => {
             userId: user._id,
         } )
     }
+    if ( !user ) {
+        return res.status( 404 ).send( 'No such user' )
+    }
+
 } )
 
 
+
+// get users all contacts
+router.get( '/:id/contacts', async ( req, res ) => {
+    const { user } = req.session
+    if ( !user ) {
+        return res.status( 401 ).send( { error: 'You are not logged in' } )
+    }
+    if ( user ) {
+        let userContacts = await User.findById( user._id ).populate( 'contacts' )
+        let contacts = await Contact.find( {} )
+        console.log( userContacts, "user's all contacts?" )
+        if ( contacts.length > 0 ) {
+            return res.status( 200 ).json( {
+                message: `You have ${userContacts.contacts.length} contacts saved`,
+                userContacts
+            } )
+        }
+    } else {
+        // console.log( "you don't seem to be logged in?" )
+        return res.status( 404 ).json( {
+            error: 'No contacts found'
+        } )
+    }
+} )
+
+// add contact to logged in User
+router.post( '/:id/add-contact', async ( req, res ) => {
+    const { user } = req.session
+    if ( !user ) {
+        return res.status( 400 ).send( 'You must be logged in' )
+    }
+    const currentUser = await User.findById( user._id )
+    console.log( currentUser, 'current' )
+    const userContact = await Contact.findOne( { email: req.body.email }
+    )
+
+    if ( !userContact ) {
+        return res.status( 404 ).send( { error: 'No such contact' } )
+    }
+    if ( currentUser.contacts.includes( userContact._id ) ) {
+        return res.status( 500 ).send( {
+            error: 'Contact has already been added',
+        } )
+    }
+
+    currentUser.contacts.push( userContact )
+    currentUser.save()
+
+    res.json( {
+        message: 'Contact added to your list',
+        currentUser,
+        userContact
+    } )
+    res.status( 200 ).end()
+} )
 
 
 

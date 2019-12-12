@@ -1,6 +1,7 @@
 const mongoose = require( 'mongoose' )
+const { Schema } = mongoose
 
-const contactSchema = new mongoose.Schema( {
+const contactSchema = new Schema( {
     name: {
         type: String,
         required: true,
@@ -12,9 +13,13 @@ const contactSchema = new mongoose.Schema( {
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     },
     phone: {
-        type: Number,
+        type: String,
         required: true
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }
 } )
 
 let Contact = mongoose.model( 'Contact', contactSchema )

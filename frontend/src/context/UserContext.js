@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 
 export const UserContext = createContext()
 
@@ -9,6 +9,11 @@ export const UserContextProvider = ( props ) => {
         // phoneNr: "072-978 00 00",
         // id: 1
     } )
+
+
+    useEffect( () => {
+        localStorage.setItem( 'user', JSON.stringify( user ) )
+    }, [user] )
 
     const keepAuthUser = ( user ) => {
         console.log( user, 'the user' )

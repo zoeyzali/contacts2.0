@@ -32,7 +32,7 @@ const SignUpForm = () => {
             if ( result.status === 200 ) {
                 setRedirect( result.res.successMssg )
             }
-            console.log( result.res.user )
+            // console.log( result.res )
         } catch ( error ) {
             console.log( error, 'err' )
         }

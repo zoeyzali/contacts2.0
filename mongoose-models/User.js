@@ -1,6 +1,8 @@
 const mongoose = require( 'mongoose' )
+const { Schema } = mongoose
 
-const userSchema = new mongoose.Schema( {
+const userSchema = new Schema( {
+
     name: {
         type: String,
         required: true
@@ -8,7 +10,6 @@ const userSchema = new mongoose.Schema( {
     phone: {
         type: String,
         required: true,
-        // unique: true
     },
     email: {
         type: String,
@@ -20,14 +21,25 @@ const userSchema = new mongoose.Schema( {
         type: String,
         required: true
     },
+    contacts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Contact'
+    }],
     createdDate: {
         type: Date,
         default: Date.now
     }
+}, {
+    toJSON: { virtuals: true },
+} )
+
+userSchema.virtual( 'myContacts', {
+    ref: 'Contact',
+    localField: '_id',
+    foreignField: 'contact'
 } )
 
 
 
-// schema.set( 'toJSON', { virtuals: true } )
 let User = mongoose.model( 'User', userSchema )
 module.exports = User
