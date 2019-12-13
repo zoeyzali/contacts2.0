@@ -59,7 +59,7 @@ app.use( '/contacts', Contact )
 // } )
 
 app.get( '/api', ( req, res ) =>
-    res.send( 'Welcome to Contacts2.0' )
+    res.send( 'Welcome to Los Contactos2.0' )
 )
 
 app.listen( port, () => console.log( `Server is running on port ${port}` ) )

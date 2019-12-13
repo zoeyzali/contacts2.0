@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react'
 
 
-// localstorage useEffect
+// localstorage user useEffect
 //     () => {
 //         const localData = localStorage.getItem( 'user' )
 //         return localData ? JSON.parse( localData ) : {}

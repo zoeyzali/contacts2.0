@@ -14,7 +14,6 @@ export const authReducer = ( state, action ) => {
                 ...state,
                 user: null
             }
-
         default:
             return state
     }

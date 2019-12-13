@@ -22,7 +22,6 @@ const App = () => {
             <Router>
                 <AuthContext>
                     <ContactContextProvider>
-
                         <section className="container-fluid">
                             <Header />
                             <div className="container-margin">

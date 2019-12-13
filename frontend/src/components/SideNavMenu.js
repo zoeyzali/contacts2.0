@@ -33,7 +33,6 @@ export default function SideNavMenu( props ) {
                     opacity: "1"
                 }}
             />
-
             <ul
                 id="slide-out"
                 className="sidenav"

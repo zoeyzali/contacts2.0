@@ -25,9 +25,9 @@ export const HomePage = () => {
             <p>{user.email}</p>
             <p>{user.phone}</p>
 
-
             {   // {user.contacts}
             }
+
             {  // {user.contacts ? ( user.contacts.map( contact => {
                 //     if ( contact !== "undefined" || null ) {
                 //         console.log( contact, 'my cont' )

@@ -97,7 +97,8 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
                                 onClick={editContact}
                             >Save</Button>
                             }
-                            <button onClick={() => setIsEditing( isEditing => !isEditing )} className="cancel-btn waves-light btn-flat">Cancel</button>
+                            <button onClick={() => setIsEditing( isEditing => !isEditing )}
+                                className="cancel-btn waves-light btn-flat">Cancel</button>
                         </form>
                     </div>
                 </div>

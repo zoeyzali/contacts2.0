@@ -15,7 +15,7 @@ const SignUpForm = () => {
                 email: data.email,
                 password: data.password
             }
-            const response = await fetch( 'http://localhost:5000/users/', {
+            const response = await fetch( '/users/', {
                 method: 'POST',
                 body: JSON.stringify( user ),
                 headers: {
@@ -39,7 +39,6 @@ const SignUpForm = () => {
     }
 
     const { data, handleInputChange, handleSubmit } = useSignUp( registerUser )
-
 
     return (
         <>

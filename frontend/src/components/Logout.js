@@ -21,7 +21,7 @@ const Logout = () => {
     return (
         <>
             {user && (
-                <Link
+                <Link to="#"
                     className="flatBtns z-depth-2"
                     onClick={handleLogout}
                 >

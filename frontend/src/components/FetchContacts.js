@@ -12,8 +12,7 @@ const FetchContacts = () => {
         const getUserContacts = async () => {
             try {
                 let userId = user._id
-                // console.log( userId, 'ID' )
-                const response = await fetch( `http://localhost:5000/users/${userId}/contacts` )
+                const response = await fetch( `users/${userId}/contacts` )
                 // if ( response ) {
                 //     const result = { res: await response.json(), status: response.status }
                 //     console.log( result, 'result from fetch' )
@@ -31,7 +30,6 @@ const FetchContacts = () => {
                 console.log( error )
             }
         }
-
         getUserContacts()
         return () => {
             // setError( false )
@@ -45,25 +43,22 @@ const FetchContacts = () => {
             {!user && <Redirect to="/login" />}
             <div>
                 {error &&
-                    <div className="error-danger"
-                        style={{ color: "crimson" }}>
-                        Please Login
-            </div>
+                    <div className="error-danger" style={{ color: "crimson" }}>
+                        Please Login</div>
                 }
                 {data.length ?
                     <>
                         <ul>
                             {data.map( contact => {
-                                console.log( data, contact, 'data and contact' )
+                                // console.log( data, contact, 'data and contact' )
                                 return <li key={contact._id}>{contact.name}
                                 </li>
-                            }
-                            )}
+                            } )}
                         </ul>
                     </>
                     :
                     <>
-                        <h4>...No contacts?</h4>
+                        <h4>oh noes no contacts</h4>
                     </>
                 }
             </div>
