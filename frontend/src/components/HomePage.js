@@ -21,7 +21,7 @@ export const HomePage = () => {
         <div className="home-page">
             <h2>Home Page</h2>
             Welcome
-                <h4>{user.name}</h4>
+            <h4>{user.name}</h4>
             <p>{user.email}</p>
             <p>{user.phone}</p>
 

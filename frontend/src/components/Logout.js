@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 const Logout = () => {
     const { user, destroyAuthUser } = useContext( UserContext )
@@ -20,7 +20,7 @@ const Logout = () => {
 
     return (
         <>
-            {user && (
+            {user ? (
                 <Link to="#"
                     className="flatBtns z-depth-2"
                     onClick={handleLogout}
@@ -35,7 +35,7 @@ const Logout = () => {
                         }}>logout</i>
                     SIGN OUT
       </Link>
-            )}
+            ) : <Redirect to="/login" />}
         </>
     )
 }

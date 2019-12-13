@@ -42,7 +42,7 @@ export const EditContactForm = ( { contact, isEditing, setIsEditing } ) => {
             <div className="container">
                 <div className="row">
                     <div className="col s12" style={{
-                        marginBottom: "0.8rem "
+                        marginBottom: "0.8rem"
                     }}>
                         <h3>Edit Contact</h3>
                         <form className="contact-form">

@@ -30,7 +30,7 @@ const App = () => {
                                     <Route exact path="/" component={HomePage} />
                                     <Route exact path="/contacts/add" component={NewContactForm} />
                                     <Route exact path="/contacts" component={ContactsList} />
-                                    <Route exact path="/contacts/user-contacts" component={Stuff} />
+                                    <Route exact path="/user-contacts" component={Stuff} />
                                     <Route exact path="/signup" component={SignUpForm} />
                                 </Switch>
                             </div>

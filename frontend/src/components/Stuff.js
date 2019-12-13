@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-// import FetchContacts from './FetchContacts'
+import FetchContacts from './FetchContacts'
 
 
 
@@ -11,8 +11,8 @@ const Stuff = () => {
         {user ?
             <div className="stuff-page">
                 <h2> & Other Contacts</h2>
-                {  // <FetchContacts />
-                }
+                <FetchContacts />
+
             </div>
             :
             <h4>No results found</h4>}
