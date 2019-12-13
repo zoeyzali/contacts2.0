@@ -11,6 +11,7 @@ import { NewContactForm } from './components/ContactForm'
 import Stuff from './components/Stuff'
 import { LoginForm } from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
+import ProtectedRoutes from './components/ProtectedRoutes'
 
 // import { ContactDetails } from './components/ContactDetails'
 // <Route exact path={`/contacts/${contact.id}`} component={ContactDetails} />
@@ -28,10 +29,10 @@ const App = () => {
                                 <Switch>
                                     <Route exact path="/login" component={LoginForm} />
                                     <Route exact path="/" component={HomePage} />
+                                    <Route exact path="/signup" component={SignUpForm} />
                                     <Route exact path="/contacts/add" component={NewContactForm} />
                                     <Route exact path="/contacts" component={ContactsList} />
-                                    <Route exact path="/user-contacts" component={Stuff} />
-                                    <Route exact path="/signup" component={SignUpForm} />
+                                    <ProtectedRoutes exact path="/user-contacts" component={Stuff} />
                                 </Switch>
                             </div>
                         </section>

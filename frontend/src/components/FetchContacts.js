@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../context/UserContext'
-import { Redirect } from 'react-router-dom'
 
 const FetchContacts = () => {
     const { user } = useContext( UserContext )
@@ -13,17 +12,17 @@ const FetchContacts = () => {
             try {
                 let userId = user._id
                 const response = await fetch( `users/${userId}/contacts` )
-                // if ( response ) {
-                //     const result = { res: await response.json(), status: response.status }
-                //     console.log( result, 'result from fetch' )
-                // }
-                const result = await response.json()
                 if ( mounted ) {
+                    const result = { res: await response.json(), status: response.status }
                     if ( result.status === 200 ) {
-                        console.log( result.status, 'wihoo' )
-                        setData( [...result] )
+                        // console.log( result.res.user.contacts, 'responde from fetch' )
+                        let contactsData = result.res.user.contacts
+                        console.log( contactsData, 'mapped data' )
+                        setData( [...contactsData] )
                     } else {
-                        console.log( result.status === 400, 'Oh noes' )
+                        if ( result.status === 400 )
+                            setError( true )
+                        console.log( result.status, 'Oh noes' )
                     }
                 }
             } catch ( error ) {
@@ -31,36 +30,40 @@ const FetchContacts = () => {
             }
         }
         getUserContacts()
+
         return () => {
-            // setError( false )
+            setError( false )
             mounted = false
         }
         //eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [] )
+    }, [setData] )
 
     return (
         <>
-            {!user && <Redirect to="/login" />}
-            <div>
-                {error &&
-                    <div className="error-danger" style={{ color: "crimson" }}>
-                        Please Login</div>
+            <div className="container db-contacts">
+                {error && <div className="error-danger" style={{ color: "crimson" }}>
+                    <span>Please Login</span>
+                </div>
                 }
-                {data.length ?
-                    <>
-                        <ul>
-                            {data.map( contact => {
-                                // console.log( data, contact, 'data and contact' )
-                                return <li key={contact._id}>{contact.name}
-                                </li>
-                            } )}
-                        </ul>
-                    </>
-                    :
-                    <>
-                        <h4>oh noes no contacts</h4>
-                    </>
-                }
+
+                <ul className="collection">
+                    {data.length ?
+                        data.map( contact => {
+                            return <li key={contact._id} className="collection-item avatar z-depth-1">
+                                <span className="contact-item">
+                                    {contact.name}
+                                </span>
+                                <p>
+                                    {contact.phone}
+                                    <br />
+                                    {contact.email}
+                                </p>
+                            </li>
+                        } )
+                        :
+                        <h4>Oh noes! no contacts</h4>
+                    }
+                </ul>
             </div>
         </>
     )

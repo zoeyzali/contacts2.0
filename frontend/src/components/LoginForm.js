@@ -7,7 +7,6 @@ import { UserContext } from '../context/UserContext'
 export const LoginForm = () => {
     const { user, keepAuthUser } = useContext( UserContext )
     const [errorMssg, setErrorMssg] = useState( null )
-    const [okToRedirect, setOkToRedirect] = useState( false )
 
     const onLogin = async () => {
         const userData = {
@@ -28,8 +27,8 @@ export const LoginForm = () => {
         if ( result.status === 200 ) {
             keepAuthUser( result.respon )
             // setErrorMssg( false )
-            console.log( 'authCon result.respon:', result.respon )
-            setOkToRedirect( true )
+            // console.log( 'authCon result.respon:', result.respon )
+            // setOkToRedirect( true )
         }
 
         if ( result.status === 400 ) {
@@ -46,8 +45,6 @@ export const LoginForm = () => {
     }
 
     const { handleInputChange, handleSubmit, data } = useLoginHook( onLogin )
-
-    // {user ? <Redirect to='/' /> : null}
 
 
     return (
@@ -79,7 +76,7 @@ export const LoginForm = () => {
                             <div className="input-field col s12">
                                 <input
                                     name="password"
-                                    placeholder="User password"
+                                    placeholder="ExUs3rPasswd"
                                     id="password"
                                     type="password"
                                     className="validate"

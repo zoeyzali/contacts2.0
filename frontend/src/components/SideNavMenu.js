@@ -23,7 +23,7 @@ export default function SideNavMenu( props ) {
 
                 <Link to="/contacts" className="logo-brand">
                     <i className="material-icons"
-                        style={{ color: "white" }}>phone</i>
+                        style={{ color: "#fff" }}>phone</i>
                 </Link>
             </nav>
 

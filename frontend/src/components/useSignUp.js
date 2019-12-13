@@ -18,9 +18,7 @@ const useSignUp = ( callback ) => {
     }
 
     const handleSubmit = ( e ) => {
-        if ( e ) {
-            e.preventDefault()
-        }
+        e.preventDefault()
         callback()
     }
 

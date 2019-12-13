@@ -14,7 +14,6 @@ const AuthContext = ( props ) => {
             status: response.status
         }
         if ( result.res ) {
-            // console.log( 'auth from Auth', result.res )
             keepAuthUser( result.res )
             setAuthUser( true )
         }

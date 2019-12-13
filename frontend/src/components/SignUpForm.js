@@ -7,6 +7,8 @@ import useSignUp from './useSignUp'
 const SignUpForm = () => {
     const [mssg, setMssg] = useState( null )
     const [redirect, setRedirect] = useState( false )
+    const [okToRedirect, setOkToRedirect] = useState( false )
+
     const registerUser = async () => {
         try {
             const user = {
@@ -31,6 +33,7 @@ const SignUpForm = () => {
             }
             if ( result.status === 200 ) {
                 setRedirect( result.res.successMssg )
+                setOkToRedirect( true )
             }
             // console.log( result.res )
         } catch ( error ) {
@@ -46,13 +49,18 @@ const SignUpForm = () => {
                 <div className="row">
                     <h3>Signup!</h3>
 
-                    {mssg && (
+                    {mssg ? (
                         <h4 className="errMssg" style={{ color: "crimson" }}>{mssg}</h4>
-                    )}
+                    ) : ""}
+
                     {redirect && (
-                        <h4 className="success" style={{ color: "green" }}>{redirect} {" "}
-                            <Link to="/login">Go to Login</Link>
-                        </h4>
+                        <div className="success-mssg z-depth-1">
+                            <h4 className="success" style={{
+                                fontSize: "1.8rem",
+                            }}>{redirect} {" "}
+                                <Link to="/login" style={{ fontSize: "1rem" }}>To Login</Link>
+                            </h4>
+                        </div>
                     )}
 
                     <form onSubmit={handleSubmit} className="col s12">
@@ -102,7 +110,7 @@ const SignUpForm = () => {
                             <div className="input-field col s12">
                                 <input
                                     name="password"
-                                    placeholder="User password"
+                                    placeholder="ExUs3rPasswd"
                                     id="password"
                                     type="password"
                                     className="validate"
@@ -116,7 +124,7 @@ const SignUpForm = () => {
                             flat={true}
                             className="flatBtns"
                             style={{
-                                width: "80%",
+                                width: "90%",
                                 justifyContent: "center",
                                 backgroundColor: "#fff",
                                 color: "#03a9f4"

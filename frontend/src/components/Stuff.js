@@ -8,14 +8,10 @@ const Stuff = () => {
     const { user } = useContext( UserContext )
 
     return <>
-        {user ?
-            <div className="stuff-page">
-                <h2> & Other Contacts</h2>
-                <FetchContacts />
-
-            </div>
-            :
-            <h4>No results found</h4>}
+        <div className="stuff-page">
+            <h2>DB Contacts</h2>
+            <FetchContacts />
+        </div>
     </>
 }
 

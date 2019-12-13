@@ -44,7 +44,7 @@ router.post( '/', async ( req, res ) => {
     let email = req.body.email
     let user = await User.findOne( { email } )
     if ( user ) {
-        res.status( 404 ).json( {
+        return res.status( 404 ).json( {
             signUpErr: 'Email exists'
         } )
     }
@@ -56,7 +56,7 @@ router.post( '/', async ( req, res ) => {
     }
     await user.save()
     res.status( 200 ).json( {
-        successMssg: 'User signed up!',
+        successMssg: 'All signed up!',
         user: user,
     } )
 } )
