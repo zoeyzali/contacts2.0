@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
+import FetchContacts from './FetchContacts'
+
+
 
 const Stuff = () => {
-    return <>
-        <div className="stuff-page">
-            <h2> & Other Stuff</h2>
+    const { user } = useContext( UserContext )
 
-        </div>
+    return <>
+        {user ?
+            <div className="stuff-page">
+                <h2> & Other Contacts</h2>
+                <FetchContacts />
+
+            </div>
+            :
+            <h4>No results found</h4>}
     </>
 }
 
-export default Stuff;
+export default Stuff

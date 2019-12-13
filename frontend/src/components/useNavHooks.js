@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 
+// a custom hook for side-nav
 export default function useNavHooks() {
     const isClient = typeof window === "object"
     function getSize() {

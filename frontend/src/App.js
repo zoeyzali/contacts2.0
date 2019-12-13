@@ -1,35 +1,42 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './css/style.css'
-import { UserContextProvider } from './context/UserContext'
+import UserContextProvider from './context/UserContext'
+import AuthContext from './components/AuthContext'
 import ContactContextProvider from './context/ContactContext'
 import { Header } from './components/Header'
 import { HomePage } from './components/HomePage'
 import ContactsList from './components/ContactsList'
 import { NewContactForm } from './components/ContactForm'
 import Stuff from './components/Stuff'
-import { ContactDetails } from './components/ContactDetails'
-// import { EditContactForm } from './components/EditContactForm'
+import { LoginForm } from './components/LoginForm'
+import SignUpForm from './components/SignUpForm'
+
+// import { ContactDetails } from './components/ContactDetails'
+// <Route exact path={`/contacts/${contact.id}`} component={ContactDetails} />
 
 
-function App( contact ) {
+const App = () => {
     return (
         <UserContextProvider>
             <Router>
-                <section className="container-fluid">
-                    <Header />
-                    <div className="container-margin">
-                        <ContactContextProvider>
-                            <Route exact path="/" component={HomePage} />
-                            <Route exact path="/contacts/add" component={NewContactForm} />
-                            <Route exact path="/contacts" component={ContactsList} />
-                            <Route exact path={`/contacts/${contact.id}`} component={ContactDetails} />
-                            {  // <Route exact path="/contacts/edit" component={EditContactForm} />
-                            }
-                            <Route exact path="/stuff" component={Stuff} />
-                        </ContactContextProvider>
-                    </div>
-                </section>
+                <AuthContext>
+                    <ContactContextProvider>
+                        <section className="container-fluid">
+                            <Header />
+                            <div className="container-margin">
+                                <Switch>
+                                    <Route exact path="/login" component={LoginForm} />
+                                    <Route exact path="/" component={HomePage} />
+                                    <Route exact path="/contacts/add" component={NewContactForm} />
+                                    <Route exact path="/contacts" component={ContactsList} />
+                                    <Route exact path="/user-contacts" component={Stuff} />
+                                    <Route exact path="/signup" component={SignUpForm} />
+                                </Switch>
+                            </div>
+                        </section>
+                    </ContactContextProvider>
+                </AuthContext>
             </Router>
         </UserContextProvider>
     )

@@ -1,9 +1,15 @@
 const mongoose = require( 'mongoose' )
+const { Schema } = mongoose
 
-const userSchema = new mongoose.Schema( {
+const userSchema = new Schema( {
+
     name: {
         type: String,
         required: true
+    },
+    phone: {
+        type: String,
+        required: true,
     },
     email: {
         type: String,
@@ -15,14 +21,34 @@ const userSchema = new mongoose.Schema( {
         type: String,
         required: true
     },
+    contacts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Contact'
+    }],
     createdDate: {
         type: Date,
         default: Date.now
     }
+}, {
+    toJSON: { virtuals: true },
 } )
 
 
+userSchema.virtual( 'userContacts', {
+    ref: 'Contact',
+    localField: '_id',
+    foreignField: 'user'
+} )
 
-// schema.set( 'toJSON', { virtuals: true } )
+userSchema.methods.toJSON = function () {
+    var obj = this.toObject();
+    delete obj.password;
+    // delete obj.isAdmin;
+    return obj;
+}
+
+
+
+
 let User = mongoose.model( 'User', userSchema )
 module.exports = User

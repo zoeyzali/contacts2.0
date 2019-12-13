@@ -3,10 +3,6 @@
         text-align: center;
         padding: 0.2rem 0;
 
-        .collection {
-            margin-top: 30px;
-        }
-
         .contact-details {
             p .collection-item {
                 font-family: 'Montserrat',
@@ -20,7 +16,7 @@
         .row .col.m6,
         .col.l6,
         .contact-form {
-            width: 75%;
+            // width: 75%;
             margin-left: auto;
             left: auto;
             right: auto;
@@ -28,6 +24,11 @@
         }
 
         .input-field input[type=text]:focus {
+            border-bottom: 1px solid #03a9f4;
+            box-shadow: 0 1px 0 0 rgb(236, 236, 236);
+        }
+
+        .input-field input[type=email]:focus {
             border-bottom: 1px solid #03a9f4;
             box-shadow: 0 1px 0 0 rgb(236, 236, 236);
         }
@@ -54,19 +55,11 @@
     }
 
     .edit-modal {
-        padding-bottom: 0.5rem;
         align-items: center;
     }
 
     .cancel-btn {
         background-color: crimson;
         color: white;
-    }
-
-    .contact-form {
-        .input-field input[type=text]:focus {
-            border-bottom: 1px solid #03a9f4;
-            box-shadow: 0 1px 0 0 rgb(236, 236, 236);
-        }
     }
 }

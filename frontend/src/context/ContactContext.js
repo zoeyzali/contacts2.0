@@ -14,10 +14,6 @@ const ContactContextProvider = ( props ) => {
 
     useEffect( () => {
         localStorage.setItem( 'contacts', JSON.stringify( contacts ) )
-        // contacts.map( contact => {
-        //     console.log( contact, 'mapping contact' )
-        //     return contact
-        // } )
     }, [contacts] )
 
 

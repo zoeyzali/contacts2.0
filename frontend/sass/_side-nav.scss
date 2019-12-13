@@ -21,6 +21,11 @@
             line-height: 52px !important;
             font-family: 'Montserrat', sans-serif;
         }
+
+        .i.material-icons.auth-icons,
+        .sidenav li>a>i {
+            float: none !important;
+        }
     }
 
     nav {
@@ -31,18 +36,15 @@
         height: 60px;
     }
 
-    .logout-btn {
-        background-color: $primary-color;
-        color: $primary-color;
-        border: 1px solid transparentize($primary-color, 0.7);
-
-        &:hover {
-            background-color: #fff;
-        }
+    .auth-icons {
+        margin: 0 20px 0 0
     }
 
-}
+    // .divider {
+    //     padding: 0.2rem;
+    // }
 
+}
 
 @media only screen and (min-width: 981px) {
     .container-margin {

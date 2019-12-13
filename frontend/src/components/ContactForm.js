@@ -28,10 +28,10 @@ export const NewContactForm = () => {
     return (
         <>
             {okToRedirect && <Redirect to="/contacts" />}
-            <div className="row">
+            <div className="container all-form">
                 <h3>Add Contact</h3>
                 <div className="col s12">
-                    <form onSubmit={handleSubmit} className="container contact-form center-align">
+                    <form onSubmit={handleSubmit} className="contact-form center-align">
                         <div className="row">
                             <div className="input-field col s6">
                                 <input
