@@ -37,7 +37,7 @@ const userSchema = new Schema( {
 userSchema.virtual( 'userContacts', {
     ref: 'Contact',
     localField: '_id',
-    foreignField: 'creator'
+    foreignField: 'user'
 } )
 
 userSchema.methods.toJSON = function () {

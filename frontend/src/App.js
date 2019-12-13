@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './css/style.css'
 import UserContextProvider from './context/UserContext'
+import AuthContext from './components/AuthContext'
 import ContactContextProvider from './context/ContactContext'
 import { Header } from './components/Header'
 import { HomePage } from './components/HomePage'
@@ -19,22 +20,24 @@ const App = () => {
     return (
         <UserContextProvider>
             <Router>
-                <ContactContextProvider>
+                <AuthContext>
+                    <ContactContextProvider>
 
-                    <section className="container-fluid">
-                        <Header />
-                        <div className="container-margin">
-                            <Switch>
-                                <Route exact path="/login" component={LoginForm} />
-                                <Route exact path="/" component={HomePage} />
-                                <Route exact path="/contacts/add" component={NewContactForm} />
-                                <Route exact path="/contacts" component={ContactsList} />
-                                <Route exact path="/contacts/user-contacts" component={Stuff} />
-                                <Route exact path="/signup" component={SignUpForm} />
-                            </Switch>
-                        </div>
-                    </section>
-                </ContactContextProvider>
+                        <section className="container-fluid">
+                            <Header />
+                            <div className="container-margin">
+                                <Switch>
+                                    <Route exact path="/login" component={LoginForm} />
+                                    <Route exact path="/" component={HomePage} />
+                                    <Route exact path="/contacts/add" component={NewContactForm} />
+                                    <Route exact path="/contacts" component={ContactsList} />
+                                    <Route exact path="/contacts/user-contacts" component={Stuff} />
+                                    <Route exact path="/signup" component={SignUpForm} />
+                                </Switch>
+                            </div>
+                        </section>
+                    </ContactContextProvider>
+                </AuthContext>
             </Router>
         </UserContextProvider>
     )

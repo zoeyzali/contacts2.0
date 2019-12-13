@@ -23,12 +23,14 @@ router.get( '/testing-users', ( req, res ) => {
 
 router.get( '/', async ( req, res ) => {
     const users = await User.find( {} )
+    console.log( req.session.user, 'session' )
     if ( users.length > 0 ) {
-        console.log( users.length, 'user count' )
+        console.log( users[0].contacts.length, 'user contacts count' )
         return res.status( 200 ).json( {
             users,
             dbMssg: 'users from db',
-            user: users[0],
+            singleUser: users[0],
+            // contacts: users.contacts,
         } )
     } else {
         return res.status( 400 ).json( {
@@ -73,10 +75,8 @@ router.post( '/login', async ( req, res ) => {
         if ( user ) {
             if ( user.password === password ) {
                 req.session.user = user
-                return res.status( 200 ).json( {
-                    user,
-                    loginInfo: `Login as ${user.name} successful`
-                } )
+                return res.status( 200 ).json( user )
+                // loginInfo: `Login as ${user.name} successful`
             }
         }
         if ( user.password !== password ) {
@@ -90,24 +90,15 @@ router.post( '/login', async ( req, res ) => {
 } )
 
 
-router.get( '/login', ( req, res ) => {
-    const { user } = req.session
-    if ( !user ) {
-        return res.status( 404 ).send( 'Not logged in' )
-    } else {
-        console.log( `the logged in user is ${user.name}` )
-        return res.status( 200 ).json(
-            user ? user : null )
-    }
+router.get( '/login', async ( req, res ) => {
+    res.json( req.session.user ? req.session.user : false )
 } )
 
 router.get( '/logout', ( req, res ) => {
     const { user } = req.session
     if ( user ) {
         req.session.destroy()
-        return res.status( 200 ).json( {
-            message: `${user.name} Logged out!`
-        } )
+        res.status( 200 ).end()
     } else {
         return res.status( 400 ).end()
     }
@@ -123,26 +114,31 @@ router.get( '/:id/contacts', async ( req, res ) => {
         return res.status( 400 ).json( 'Make sure to login!' )
     }
     try {
-        const currentUser = await User.findById( user._id )
+        // const myCons = await User.findOne( { _id: user._id } )
+        const currentUser = await User.findById( req.params.id )
             .populate( {
-                path: 'userContacts',
+                path: 'contacts',
+                select: 'name email phone',
                 populate: {
-                    path: "creator",
-                    model: "User"
+                    path: "userContacts",
+                    model: "Contact"
                 }
             } )
-        if ( user && String( user._id ) === req.session.user._id ) {
-            let contacts = currentUser.userContacts
-            console.log( contacts[0].creator.name, 'con length' )
+        console.log( currentUser.contacts.length, 'my contactos' )
+
+        if ( user._id !== req.params.id ) {
+            return res.status( 400 ).json( 'Are you sure you are logged in?' )
+
+        } else {
+            console.log( currentUser.name, 'loggedin user' )
             return res.status( 200 ).json( {
-                // user: contacts[0].creator,
-                contacts,
+                user: currentUser,
+                count: currentUser.contacts.length,
                 errorMssg,
             } )
-        } else {
-            return res.send( errorMssg )
         }
-    } catch ( error ) {
+    }
+    catch ( error ) {
         console.log( error, 'catch error' )
     }
 } )

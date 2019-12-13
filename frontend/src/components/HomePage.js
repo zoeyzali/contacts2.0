@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom'
 
 export const HomePage = () => {
     const { user } = useContext( UserContext )
+    // console.log( user, 'homeboi user' )
+
     // const [inputValue, setValue] = useState( "reactjs" )
     // const [subreddit, setSubreddit] = useState( inputValue )
 
@@ -22,7 +24,18 @@ export const HomePage = () => {
                 <h4>{user.name}</h4>
             <p>{user.email}</p>
             <p>{user.phone}</p>
-            {user.contacts}
+
+
+            {   // {user.contacts}
+            }
+            {  // {user.contacts ? ( user.contacts.map( contact => {
+                //     if ( contact !== "undefined" || null ) {
+                //         console.log( contact, 'my cont' )
+                //         return <li key={contact._id}>{contact.name}</li>
+                //     }
+                // } ) ) : null
+                // }
+            }
 
             { /*    
             Testing fetchData wiith useEffect
@@ -36,8 +49,8 @@ export const HomePage = () => {
                     />
                 </form>
                 <Stuff subreddit={subreddit} />
-            </div>
-                          */}
+            </div> */}
+
         </div>
     </>
 }

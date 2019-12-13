@@ -5,7 +5,7 @@ import useLoginHook from './useLogin'
 import { UserContext } from '../context/UserContext'
 
 export const LoginForm = () => {
-    const { keepAuthUser } = useContext( UserContext )
+    const { user, keepAuthUser } = useContext( UserContext )
     const [errorMssg, setErrorMssg] = useState( null )
     const [okToRedirect, setOkToRedirect] = useState( false )
 
@@ -14,7 +14,7 @@ export const LoginForm = () => {
             email: data.email,
             password: data.password,
         }
-        const response = await fetch( 'http://localhost:5000/users/login', {
+        const response = await fetch( '/users/login', {
             method: 'POST',
             body: JSON.stringify( userData ),
             headers: {
@@ -22,21 +22,21 @@ export const LoginForm = () => {
             }
         } )
         const result = {
-            res: await response.json(),
+            respon: await response.json(),
             status: response.status
         }
         if ( result.status === 200 ) {
-            keepAuthUser( result.res.user )
-            setOkToRedirect( true )
+            keepAuthUser( result.respon )
             // setErrorMssg( false )
-            // console.log( 'logging result', result )
-
+            console.log( 'authCon result.respon:', result.respon )
+            setOkToRedirect( true )
         }
+
         if ( result.status === 400 ) {
-            setErrorMssg( result.res.loginErr )
+            setErrorMssg( result.respon.loginErr )
         }
         if ( result.status === 404 ) {
-            setErrorMssg( result.res.error )
+            setErrorMssg( result.respon.error )
         } else {
             if ( result.status === 500 ) {
                 let mssg = "something aint quite right"
@@ -52,14 +52,13 @@ export const LoginForm = () => {
 
     return (
         <>
-            {okToRedirect && <Redirect to="/" />}
+            {user ? <Redirect to="/" /> : null}
             <div className="container all-form">
                 <h3>Sign In</h3>
                 {errorMssg && (
-                    <h4 className="form-error"
-                        style={{
-                            color: "crimson"
-                        }}>{errorMssg}</h4>
+                    <h4 className="form-error" style={{
+                        color: "crimson"
+                    }}>{errorMssg}</h4>
                 )}
                 <div className="row">
                     <form onSubmit={handleSubmit} className="col s12">
@@ -90,7 +89,6 @@ export const LoginForm = () => {
                             </div>
                         </div>
                         <Button
-                            // disabled={data.isSubmitting}
                             flat={true}
                             className="waves-effect waves-light loginBtn">Login
                         </Button>

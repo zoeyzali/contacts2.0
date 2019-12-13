@@ -12,12 +12,12 @@ router.get( '/testing-contacts', ( req, res ) => {
 } )
 
 router.get( '/', async ( req, res ) => {
-    const contacts = await Contact.find( {} ).populate( "creator", "name" )
+    const contacts = await Contact.find( {} ).populate( "user", "name" )
     if ( contacts.length > 0 ) {
         // console.log( contacts.length, 'count' )
         return res.status( 200 ).json( {
             contacts,
-            // contact: contacts.contact,
+            contact: contacts[0].contact,
             dbMssg: 'contacts from db'
         } )
     } else {
@@ -36,49 +36,65 @@ router.post( '/create-contact', async ( req, res ) => {
     try {
         const currentUser = await User.findById( user._id )
         let { name, email, phone } = req.body
-        const ifContact = await Contact.findOne( { phone: String( phone ) } )
+        const ifContact = await Contact.findOne( { email: String( email ) } )
 
-        if ( ifContact && String( ifContact.creator._id ) !== String( user._id ) ) {
-            console.log( ifContact._id, 'exists' )
-            console.log( ifContact.creator._id, 'exists' )
-            console.log( user._id, 'user ID' )
+        if ( ifContact && String( ifContact.user._id ) !== String( user._id ) ) {
+            // console.log( ifContact._id, 'exists' )
+            console.log( ifContact.user._id, 'exists' )
             return res.status( 404 ).send( 'Contact already exists' )
         }
         const contact = new Contact( {
             ...req.body,
-            creator: currentUser,
+            user: currentUser,
         } )
         const result = await contact.save()
-        console.log( result, result.creator.name, 'created new contact' )
+        currentUser.contacts.push( result )
+        await currentUser.save()
+        console.log( result, 'new create result' )
         return res.status( 200 ).json( result )
 
     } catch ( error ) {
         return res.status( 500 ).json( {
-            error: "something aint right code 500"
+            error: "catching error 500"
         } )
     }
 } )
+
+
 
 
 
 router.delete( '/:id', async ( req, res ) => {
     const { user } = req.session
-    if ( user ) {
-        let contact = await Contact.findOneAndDelete( { _id: req.params.id } )
-        if ( contact ) {
-            return res.status( 200 ).json( {
-                id: contact._id,
-                dbMssg: `${contact.name} deleted`
-            } )
-        }
-        if ( !contact ) {
-            return res.status( 404 ).json( {
-                errMssg: 'Contact not found!'
-            } )
-        }
+    let contact = await Contact.findOneAndDelete( { _id: req.params.id } )
+    const currentUser = await User.findById( user._id )
+    console.log( currentUser.name, 'user from DEL' )
+
+    if ( contact ) {
+        console.log( contact, 'contact to be deleted' )
+        // console.log( currentUser.contacts, 'from dELE' )
+        // if ( currentUser.contacts.includes( contact._id ) ) {
+        //     currentUser.contacts.splice( currentUser.contacts.indexOf( contact._id ), 1 )
+        //     await currentUser.save()
+        // }
+        // await currentUser.save()
+        return res.status( 200 ).json( {
+            id: contact._id,
+            dbMssg: `${contact.name} deleted`
+        } )
+    }
+    if ( !contact || contact === null ) {
+        console.log( currentUser.contacts, 'bhenchoo' )
+
+        // if ( currentUser.contacts.includes( contact ) ) {
+        //     currentUser.contacts.splice( currentUser.contacts.indexOf( contact ), 1 )
+        // }
+        // currentUser.save()
+        return res.status( 404 ).json( {
+            errMssg: 'Contact not found!'
+        } )
     }
 } )
-
 
 
 

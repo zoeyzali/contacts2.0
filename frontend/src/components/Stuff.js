@@ -9,7 +9,7 @@ const Stuff = () => {
 
     return <>
         {user ? <div className="stuff-page">
-            <h2> & Other Stuff</h2>
+            <h2> & Other Contacts</h2>
             {            // <FetchContacts />
             }
         </div>
