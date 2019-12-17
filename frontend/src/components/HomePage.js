@@ -15,9 +15,10 @@ export const HomePage = () => {
     //     e.preventDefault()
     //     setSubreddit( inputValue )
     // }
+    // {!user && <Redirect to="/login" />}
+
 
     return <>
-        // {!user && <Redirect to="/login" />}
         <div className="home-page">
             <h2>Home Page</h2>
             Welcome
