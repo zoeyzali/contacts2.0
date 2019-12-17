@@ -23,10 +23,10 @@ export const ContactDetails = ( { contact } ) => {
                         <br />
                         {contact.email}
                     </p>
-                    <button onClick={() => dispatch( { type: 'DELETE_CONTACT', id: contact.id } )}
+                    <a href="#delete" onClick={() => dispatch( { type: 'DELETE_CONTACT', id: contact.id } )}
                         className="secondary-content deleteBtn">
                         <i className="material-icons">delete</i>
-                    </button>
+                    </a>
 
                     <a href="#edit"
                         onClick={() => setIsEditing( isEditing => !isEditing )}
