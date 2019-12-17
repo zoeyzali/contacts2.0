@@ -10,10 +10,8 @@ const Logout = () => {
             method: 'GET',
             credentials: 'include',
         } )
-        if ( response ) {
-            console.log( response, 'oh noes response' )
-        }
-        if ( response.status === 200 ) {
+        if ( response && response.status === 200 ) {
+            // console.log( response, 'oh noes response' )
             destroyAuthUser()
         }
     }

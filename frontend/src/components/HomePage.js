@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import Stuff from './Stuff'
 
 
@@ -8,49 +8,30 @@ export const HomePage = () => {
     const { user } = useContext( UserContext )
     // console.log( user, 'homeboi user' )
 
-    // const [inputValue, setValue] = useState( "reactjs" )
-    // const [subreddit, setSubreddit] = useState( inputValue )
 
-    // const handleSubmit = ( e ) => {
-    //     e.preventDefault()
-    //     setSubreddit( inputValue )
-    // }
+    // {!user && <Redirect to="/login" />}
+
 
     return <>
-        {!user && <Redirect to="/login" />}
-        <div className="home-page">
-            <h2>Home Page</h2>
-            Welcome
-            <h4>{user.name}</h4>
-            <p>{user.email}</p>
-            <p>{user.phone}</p>
-
-            {   // {user.contacts}
+        <div className="home-page contacts-list">
+            {user ? (
+                <>
+                    <h2>Home Page</h2>
+                    Welcome
+                    <h4>{user.name}</h4>
+                    <p>{user.email}</p>
+                    <p>{user.phone}</p>
+                </>
+            ) : <div>
+                    <h2>Welcome Guest</h2>
+                    <div className="btn-container">
+                        You can already add contacts!
+                            <Link to="/contacts/add" className="btn-floating btn-large waves-effect waves-light addBtn">
+                            <i className="material-icons">add</i>
+                        </Link>
+                    </div>
+                </div>
             }
-
-            {  // {user.contacts ? ( user.contacts.map( contact => {
-                //     if ( contact !== "undefined" || null ) {
-                //         console.log( contact, 'my cont' )
-                //         return <li key={contact._id}>{contact.name}</li>
-                //     }
-                // } ) ) : null
-                // }
-            }
-
-            { /*    
-            Testing fetchData wiith useEffect
-                    <div className="container">
-                <form onSubmit={handleSubmit} className="input-field col s6">
-                    <input
-                        type="text"
-                        className="input-field col s6"
-                        value={inputValue}
-                        onChange={e => setValue( e.target.value )}
-                    />
-                </form>
-                <Stuff subreddit={subreddit} />
-            </div> */}
-
         </div>
     </>
 }

@@ -3,6 +3,7 @@ import { ContactContext } from '../context/ContactContext'
 import contactImg from '../images/yuna.jpg'
 import { EditContactForm } from './EditContactForm'
 
+
 export const ContactDetails = ( { contact } ) => {
     const { dispatch } = useContext( ContactContext )
     const [isEditing, setIsEditing] = useState( false )
@@ -11,7 +12,7 @@ export const ContactDetails = ( { contact } ) => {
     return (
         <>
             <div className="contact-details">
-                <li key={contact.id} className="collection-item avatar  z-depth-1">
+                <li key={contact.id} className="collection-item avatar z-depth-1">
                     <img src={contactImg} alt="contact-avatar"
                         className="circle" />
                     <span className="contact-item">
@@ -22,10 +23,10 @@ export const ContactDetails = ( { contact } ) => {
                         <br />
                         {contact.email}
                     </p>
-                    <button onClick={() => dispatch( { type: 'DELETE_CONTACT', id: contact.id } )}
+                    <a href="#delete" onClick={() => dispatch( { type: 'DELETE_CONTACT', id: contact.id } )}
                         className="secondary-content deleteBtn">
                         <i className="material-icons">delete</i>
-                    </button>
+                    </a>
 
                     <a href="#edit"
                         onClick={() => setIsEditing( isEditing => !isEditing )}
