@@ -4,11 +4,11 @@ import { UserContext } from '../context/UserContext'
 const AuthContext = ( props ) => {
     const { keepAuthUser } = useContext( UserContext )
     const [authUser, setAuthUser] = useState( false )
-    const [isLoading, setIsLoading] = useState( true )
+    const [isLoading, setIsLoading] = useState( false )
 
 
-    const checkLogin = async () => {
-        const response = await fetch( '/users/login' ).catch( err => console.log( err, ' authContextKeeper error' ) )
+    const checkForLogin = async () => {
+        const response = await fetch( '/users/login' ).catch( err => console.log( err, 'authContextKeeper error' ) )
         const result = {
             res: await response.json(),
             status: response.status
@@ -19,10 +19,11 @@ const AuthContext = ( props ) => {
         }
         setIsLoading( false )
     }
-
     if ( !authUser ) {
-        checkLogin()
+        checkForLogin()
     }
+
+
 
     if ( isLoading ) {
         return <div className="progress" style={{

@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 export const HomePage = () => {
     const { user } = useContext( UserContext )
-    // console.log( user, 'homeboi user' )
+    console.log( user, 'homeboi user' )
 
     // const [inputValue, setValue] = useState( "reactjs" )
     // const [subreddit, setSubreddit] = useState( inputValue )
@@ -17,7 +17,7 @@ export const HomePage = () => {
     // }
 
     return <>
-        {!user && <Redirect to="/login" />}
+        // {!user && <Redirect to="/login" />}
         <div className="home-page">
             <h2>Home Page</h2>
             Welcome
@@ -25,17 +25,6 @@ export const HomePage = () => {
             <p>{user.email}</p>
             <p>{user.phone}</p>
 
-            {   // {user.contacts}
-            }
-
-            {  // {user.contacts ? ( user.contacts.map( contact => {
-                //     if ( contact !== "undefined" || null ) {
-                //         console.log( contact, 'my cont' )
-                //         return <li key={contact._id}>{contact.name}</li>
-                //     }
-                // } ) ) : null
-                // }
-            }
 
             { /*    
             Testing fetchData wiith useEffect
