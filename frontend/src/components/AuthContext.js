@@ -6,9 +6,8 @@ const AuthContext = ( props ) => {
     const [authUser, setAuthUser] = useState( false )
     const [isLoading, setIsLoading] = useState( false )
 
-
     const checkForLogin = async () => {
-        const response = await fetch( '/users/login' ).catch( err => console.log( err, 'authContextKeeper error' ) )
+        const response = await fetch( '/users/login' ).catch( err => console.log( err, 'authContextKeeperErr' ) )
         const result = {
             res: await response.json(),
             status: response.status
@@ -22,7 +21,6 @@ const AuthContext = ( props ) => {
     if ( !authUser ) {
         checkForLogin()
     }
-
 
 
     if ( isLoading ) {

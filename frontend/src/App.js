@@ -13,8 +13,7 @@ import { LoginForm } from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
 import ProtectedRoutes from './components/ProtectedRoutes'
 
-// import { ContactDetails } from './components/ContactDetails'
-// <Route exact path={`/contacts/${contact.id}`} component={ContactDetails} />
+
 
 
 const App = () => {
