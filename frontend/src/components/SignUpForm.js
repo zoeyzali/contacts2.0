@@ -48,7 +48,6 @@ const SignUpForm = () => {
             <div className="container signup-page all-form">
                 <div className="row">
                     <h3>Signup!</h3>
-
                     {mssg ? (
                         <h4 className="errMssg" style={{ color: "crimson" }}>{mssg}</h4>
                     ) : ""}
