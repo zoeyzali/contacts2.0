@@ -7,7 +7,7 @@ import useSignUp from './useSignUp'
 const SignUpForm = () => {
     const [mssg, setMssg] = useState( null )
     const [redirect, setRedirect] = useState( false )
-    const [okToRedirect, setOkToRedirect] = useState( false )
+    // const [okToRedirect, setOkToRedirect] = useState( false )
 
     const registerUser = async () => {
         try {
@@ -33,7 +33,7 @@ const SignUpForm = () => {
             }
             if ( result.status === 200 ) {
                 setRedirect( result.res.successMssg )
-                setOkToRedirect( true )
+                // setOkToRedirect( true )
             }
             // console.log( result.res )
         } catch ( error ) {

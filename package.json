@@ -4,6 +4,7 @@
   "description": "Ev. backend",
   "main": "index.js",
   "dependencies": {
+    "concurrently": "^5.0.2",
     "connect-mongo": "^3.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -15,7 +16,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "cd frontend && npm start",
+    "backend": "nodemon --ignore frontend/ index",
+    "start": "concurrently \"npm:backend\" \"npm:frontend\""
   },
   "repository": {
     "type": "git",
