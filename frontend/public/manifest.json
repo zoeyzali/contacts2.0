@@ -1,6 +1,7 @@
 {
   "short_name": "Contacts2.0",
-  "name": "Contacts-app",
+  "description": "Side project practicing react hooks with useContext etc. MERN-stack",
+  "name": "zoeali",
   "icons": [ {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
@@ -19,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#03A9F5",
   "background_color": "#ffffff"
 }

@@ -1,7 +1,7 @@
-@import "custom-variables";
 @import "../node_modules/materialize-css/sass/materialize";
+@import "_custom-variables";
 @import "_base";
-@import "side-nav";
-@import "contacts-page";
+@import "_side-nav";
+@import "_contacts-page";
 @import "login-form";
 @import "home-page";

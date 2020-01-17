@@ -1,8 +1,7 @@
 import React from 'react'
 import { Row } from 'react-materialize'
 import SideNavMenu from './SideNavMenu'
-// import { UserContext } from '../context/UserContext'
-//{useContext}
+
 
 export const Header = () => {
     const menuPaths = [
@@ -24,7 +23,6 @@ export const Header = () => {
         }
     ]
 
-    // const { user } = useContext( UserContext )
     return (
         <Row>
             <SideNavMenu paths={menuPaths} title="Menu"

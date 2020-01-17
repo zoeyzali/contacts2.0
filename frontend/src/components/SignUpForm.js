@@ -47,21 +47,20 @@ const SignUpForm = () => {
         <>
             <div className="container signup-page all-form">
                 <div className="row">
-                    <h3>Signup!</h3>
+                    <h3>Signup</h3>
                     {mssg ? (
                         <h4 className="errMssg" style={{ color: "crimson" }}>{mssg}</h4>
                     ) : ""}
 
                     {redirect && (
-                        <div className="success-mssg z-depth-1">
+                        <div className="success-mssg z-depth-2">
                             <h4 className="success" style={{
-                                fontSize: "1.8rem",
-                            }}>{redirect} {" "}
+                                fontSize: "1.8rem"
+                            }}> {redirect} {" "}
                                 <Link to="/login" style={{ fontSize: "1rem" }}>To Login</Link>
                             </h4>
                         </div>
                     )}
-
                     <form onSubmit={handleSubmit} className="col s12">
                         <div className="row">
                             <div className="input-field col s12">

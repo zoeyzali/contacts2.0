@@ -19,10 +19,14 @@ h3,
 h4 {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
+    color: #03a9f4;
+    text-transform: lowercase;
 }
 
 h3 {
     color: $primary-color;
+    margin-top: 0.5rem;
+    padding: 1rem 0.4rem;
 }
 
 .btn {
@@ -47,4 +51,24 @@ h3 {
     &:hover {
         background-color: #fff;
     }
+}
+
+.footer-container {
+    text-align: center;
+}
+
+.footer {
+    position: relative;
+    margin: auto;
+}
+
+.footer-text {
+    color: #03a9f4 !important;
+    background-color: #f8f6f7 !important;
+    font-size: 0.95rem;
+    padding: 1.5rem 0.5rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

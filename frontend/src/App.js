@@ -12,6 +12,7 @@ import Stuff from './components/Stuff'
 import { LoginForm } from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
 import ProtectedRoutes from './components/ProtectedRoutes'
+import Footer from './components/Footer'
 
 
 
@@ -34,6 +35,7 @@ const App = () => {
                                     <ProtectedRoutes exact path="/user-contacts" component={Stuff} />
                                 </Switch>
                             </div>
+                            <Footer />
                         </section>
                     </ContactContextProvider>
                 </AuthContext>

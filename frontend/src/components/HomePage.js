@@ -23,7 +23,7 @@ export const HomePage = () => {
                     <p>{user.phone}</p>
                 </>
             ) : <div>
-                    <h2>Welcome Guest</h2>
+                    <h3>Welcome Guest</h3>
                     <div className="btn-container">
                         You can already add contacts!
                             <Link to="/contacts/add" className="btn-floating btn-large waves-effect waves-light addBtn">
