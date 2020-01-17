@@ -1,17 +1,5 @@
 import React, { createContext, useState } from 'react'
 
-
-// localstorage user useEffect
-//     () => {
-//         const localData = localStorage.getItem( 'user' )
-//         return localData ? JSON.parse( localData ) : {}
-//     } )
-
-// useEffect( () => {
-//     localStorage.setItem( 'user', JSON.stringify( user ) )
-// }, [user] )
-
-
 export const UserContext = createContext()
 
 const UserContextProvider = ( props ) => {

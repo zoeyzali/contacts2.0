@@ -27,7 +27,6 @@ export const LoginForm = () => {
         if ( result.status === 200 ) {
             keepAuthUser( result.respon )
             // setErrorMssg( false )
-            // console.log( 'authCon result.respon:', result.respon )
             // setOkToRedirect( true )
         }
 

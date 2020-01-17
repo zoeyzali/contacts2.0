@@ -17,12 +17,11 @@ const FetchContacts = () => {
                     if ( result.status === 200 ) {
                         // console.log( result.res.user.contacts, 'responde from fetch' )
                         let contactsData = result.res.user.contacts
-                        console.log( contactsData, 'mapped data' )
                         setData( [...contactsData] )
                     } else {
                         if ( result.status === 400 )
                             setError( true )
-                        console.log( result.status, 'Oh noes' )
+                        // console.log( result.status, 'Oh noes' )
                     }
                 }
             } catch ( error ) {

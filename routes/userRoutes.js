@@ -23,9 +23,7 @@ router.get( '/testing-users', ( req, res ) => {
 
 router.get( '/', async ( req, res ) => {
     const users = await User.find( {} )
-    console.log( req.session.user, 'session' )
     if ( users.length > 0 ) {
-        console.log( users[0].contacts.length, 'user contacts count' )
         return res.status( 200 ).json( {
             users,
             dbMssg: 'users from db',
@@ -124,13 +122,12 @@ router.get( '/:id/contacts', async ( req, res ) => {
                     model: "Contact"
                 }
             } )
-        console.log( currentUser.contacts.length, 'my contactos' )
+        // console.log( currentUser.contacts.length, 'my contactos' )
 
         if ( user._id !== req.params.id ) {
             return res.status( 400 ).json( 'Are you sure you are logged in?' )
 
         } else {
-            console.log( currentUser.name, 'loggedin user' )
             return res.status( 200 ).json( {
                 user: currentUser,
                 count: currentUser.contacts.length,
