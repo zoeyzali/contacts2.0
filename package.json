@@ -18,8 +18,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "frontend": "cd frontend && npm start",
-    "backend": "nodemon --ignore frontend/ index",
-    "start": "concurrently \"npm:backend\" \"npm:frontend\""
+    "backend-dev": "nodemon --ignore frontend/ index",
+    "backend": "NODE_ENV=production node index",
+    "start": "concurrently \"npm:backend-dev\" \"npm:frontend\""
   },
   "repository": {
     "type": "git",

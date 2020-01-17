@@ -52,11 +52,19 @@ app.use( '/users', User )
 app.use( '/contacts', Contact )
 
 
-// test route
-// app.get( '/', function ( req, res, next ) {
-//     res.setHeader( 'Last-Modified', ( new Date() ).toUTCString() )
-//     next()
-// } )
+if ( process.env.NODE_ENV === 'production' ) {
+
+    // if in production, serve static files of frontend build
+    app.use( express.static( 'frontend/build' ) )
+
+    // serve index html for all urls as last resort - so it works with the whole SPA things
+    app.get( '*', ( req, res ) => {
+
+        res.sendFile( path.resolve( __dirname, 'frontend/build/index.html' ) )
+
+    } )
+
+}
 
 app.get( '/api', ( req, res ) =>
     res.send( 'Welcome to Los Contactos2.0' )
