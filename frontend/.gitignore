@@ -1,0 +1,4 @@
+/built-lambda/
+/build/
+/node_modules
+.netlify/

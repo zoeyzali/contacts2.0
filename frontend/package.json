@@ -17,8 +17,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:lambda": "netlify-lambda build src/lambda",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "netlify-lambda": "^1.6.3"
   },
   "eslintConfig": {
     "extends": "react-app"

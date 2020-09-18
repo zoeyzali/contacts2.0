@@ -55,7 +55,7 @@ export default function SideNavMenu( props ) {
 
                         {user ? (
                             `Logged in as ${user.name}`
-                        ) : "No Active User"}
+                        ) : "No loggedin user"}
                     </Link>
                 </li>
 
@@ -73,11 +73,11 @@ export default function SideNavMenu( props ) {
                 ) )}
 
                 <li>
-                    <div className="divider z-depth-5" />
+                    <div className="divider z-depth-4" />
                 </li>
                 <li>
                     {!user ? <Link to="/login"
-                        className="flatBtns z-depth-2">
+                        className="flatBtns z-depth-2" onClick={() => setSlider( s => !s )}>
                         <i className="material-icons auth-icons"
                             style={{
                                 color: "#03a9f4",

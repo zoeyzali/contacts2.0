@@ -1,6 +1,8 @@
+require( 'dotenv' ).config( { path: './.env' } )
 const express = require( 'express' )
 const app = express()
 const cors = require( 'cors' )
+const path = require( 'path' )
 const port = process.env.port || 5000
 const Sass = require( './sass' )
 const config = require( './config.json' )
@@ -16,7 +18,7 @@ const salt = 'hellofromtheotherside'
 for ( let conf of config.sass ) {
     new Sass( conf )
 }
-
+console.log( process.env.DB )
 let dbName = "Contacto"
 mongoose.connect( URI, {
     useNewUrlParser: true,
@@ -61,9 +63,7 @@ if ( process.env.NODE_ENV === 'production' ) {
     app.get( '*', ( req, res ) => {
 
         res.sendFile( path.resolve( __dirname, 'frontend/build/index.html' ) )
-
     } )
-
 }
 
 app.get( '/api', ( req, res ) =>

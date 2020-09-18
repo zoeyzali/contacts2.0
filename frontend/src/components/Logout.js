@@ -11,7 +11,6 @@ const Logout = () => {
             credentials: 'include',
         } )
         if ( response && response.status === 200 ) {
-            // console.log( response, 'oh noes response' )
             destroyAuthUser()
         }
     }
@@ -27,8 +26,6 @@ const Logout = () => {
                         style={{
                             color: "#03a9f4",
                             verticalAlign: "middle",
-                            // marginBottom: "0.2rem",
-                            // marginTop: "0.3rem",
                             fontSize: "1.6rem"
                         }}>logout</i>
                     SIGN OUT
